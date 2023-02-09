@@ -1,0 +1,234 @@
+{
+  "tests": [
+    {
+      "name": "InstructionBookletTest - Constructor Test - 1 Mark",
+      "setup": "",
+      "run": "gradle test --tests 'InstructionBookletTest.constructorTests'",
+      "input": "",
+      "output": "",
+      "comparison": "included",
+      "timeout": 10,
+      "points": 1
+    },
+    {
+      "name": "InstructionBookletTest - fileNameGetAndSetWorkingCorrectly - 2 Marks",
+      "setup": "",
+      "run": "gradle test --tests 'InstructionBookletTest.fileNameGetAndSetWorkingCorrectly'",
+      "input": "",
+      "output": "",
+      "comparison": "included",
+      "timeout": 10,
+      "points": 2
+    },
+    {
+      "name": "InstructionBookletTest - pageNumbersGetAndSetWorkingCorrectly - 2 Marks",
+      "setup": "",
+      "run": "gradle test --tests 'InstructionBookletTest.pageNumbersGetAndSetWorkingCorrectly'",
+      "input": "",
+      "output": "",
+      "comparison": "included",
+      "timeout": 10,
+      "points": 2
+    },
+    {
+      "name": "InstructionBookletTest - validatingTheEqualsMethod - 1 Mark",
+      "setup": "",
+      "run": "gradle test --tests 'InstructionBookletTest.validatingTheEqualsMethod'",
+      "input": "",
+      "output": "",
+      "comparison": "included",
+      "timeout": 10,
+      "points": 1
+    },
+    {
+      "name": "InstructionBookletTest - ToString - 2 Marks",
+      "setup": "",
+      "run": "gradle test --tests 'InstructionBookletTest$ToString'",
+      "input": "",
+      "output": "",
+      "comparison": "included",
+      "timeout": 10,
+      "points": 2
+    },
+    {
+      "name": "LegoSetTests - Constructors - 3 Marks",
+      "setup": "",
+      "run": "gradle test --tests 'LegoSetTest$Constructors'",
+      "input": "",
+      "output": "",
+      "comparison": "included",
+      "timeout": 10,
+      "points": 3
+    },
+    {
+      "name": "LegoSetTests - Getters and Setters - 7 Marks",
+      "setup": "",
+      "run": "gradle test --tests 'LegoSetTest$GettersAndSetters'",
+      "input": "",
+      "output": "",
+      "comparison": "included",
+      "timeout": 10,
+      "points": 7
+    },
+    {
+      "name": "LegoSetTests - ArrayListTests - 8 Marks",
+      "setup": "",
+      "run": "gradle test --tests 'LegoSetTest$ArrayListTests'",
+      "input": "",
+      "output": "",
+      "comparison": "included",
+      "timeout": 10,
+      "points": 8
+    },
+    {
+      "name": "LegoSetTests - BoilerPlateTests - 4 Marks",
+      "setup": "",
+      "run": "gradle test --tests 'LegoSetTest$BoilerPlateTests'",
+      "input": "",
+      "output": "",
+      "comparison": "included",
+      "timeout": 10,
+      "points": 4
+    },
+    {
+      "name": "API Tests - ArrayListCRUD - 4 Marks",
+      "setup": "",
+      "run": "gradle test --tests 'LegoSetAPITest$ArrayListCRUD'",
+      "input": "",
+      "output": "",
+      "comparison": "included",
+      "timeout": 10,
+      "points": 4
+    },
+    {
+      "name": "API Tests - ArrayListSetStockStatus - 2 Marks",
+      "setup": "",
+      "run": "gradle test --tests 'LegoSetAPITest$ArrayListSetStockStatus'",
+      "input": "",
+      "output": "",
+      "comparison": "included",
+      "timeout": 10,
+      "points": 2
+    },
+    {
+      "name": "API Tests - CountingMethodsBasic - 2 Marks",
+      "setup": "",
+      "run": "gradle test --tests 'LegoSetAPITest$CountingMethodsBasic'",
+      "input": "",
+      "output": "",
+      "comparison": "included",
+      "timeout": 10,
+      "points": 2
+    },
+    {
+      "name": "API Tests - CountingMethodsAdvanced - 3 Marks",
+      "setup": "",
+      "run": "gradle test --tests 'LegoSetAPITest$CountingMethodsAdvanced'",
+      "input": "",
+      "output": "",
+      "comparison": "included",
+      "timeout": 10,
+      "points": 3
+    },
+    {
+      "name": "API Tests - ListAllLegoSets - 1 Mark",
+      "setup": "",
+      "run": "gradle test --tests 'LegoSetAPITest$ListAllLegoSets'",
+      "input": "",
+      "output": "",
+      "comparison": "included",
+      "timeout": 10,
+      "points": 1
+    },
+    {
+      "name": "API Tests - ListLegoSetsByStockStatus - 2 Marks",
+      "setup": "",
+      "run": "gradle test --tests 'LegoSetAPITest$ListLegoSetsByStockStatus'",
+      "input": "",
+      "output": "",
+      "comparison": "included",
+      "timeout": 10,
+      "points": 2
+    },
+    {
+      "name": "API Tests - ListLegoSetsByTheme - 2 Marks",
+      "setup": "",
+      "run": "gradle test --tests 'LegoSetAPITest$ListLegoSetsByTheme'",
+      "input": "",
+      "output": "",
+      "comparison": "included",
+      "timeout": 10,
+      "points": 2
+    },
+    {
+      "name": "API Tests - ListAllBooklets - 2 Marks",
+      "setup": "",
+      "run": "gradle test --tests 'LegoSetAPITest$ListAllBooklets'",
+      "input": "",
+      "output": "",
+      "comparison": "included",
+      "timeout": 10,
+      "points": 2
+    },
+    {
+      "name": "API Tests - ListLegoSetsByAge - 2 Marks",
+      "setup": "",
+      "run": "gradle test --tests 'LegoSetAPITest$ListLegoSetsByAge'",
+      "input": "",
+      "output": "",
+      "comparison": "included",
+      "timeout": 10,
+      "points": 2
+    },
+    {
+      "name": "API Tests - ListLegoSetStockByTheme - 3 Marks",
+      "setup": "",
+      "run": "gradle test --tests 'LegoSetAPITest$ListLegoSetStockByTheme'",
+      "input": "",
+      "output": "",
+      "comparison": "included",
+      "timeout": 10,
+      "points": 3
+    },
+    {
+      "name": "API Tests - FindMethods - 2 Marks",
+      "setup": "",
+      "run": "gradle test --tests 'LegoSetAPITest$FindMethods'",
+      "input": "",
+      "output": "",
+      "comparison": "included",
+      "timeout": 10,
+      "points": 2
+    },
+    {
+      "name": "API Tests - SearchLegoSetsByName - 2 Marks",
+      "setup": "",
+      "run": "gradle test --tests 'LegoSetAPITest$SearchLegoSetsByName'",
+      "input": "",
+      "output": "",
+      "comparison": "included",
+      "timeout": 10,
+      "points": 2
+    },
+    {
+      "name": "API Tests - SearchBookletsByFileName - 2 Marks",
+      "setup": "",
+      "run": "gradle test --tests 'LegoSetAPITest$SearchBookletsByFileName'",
+      "input": "",
+      "output": "",
+      "comparison": "included",
+      "timeout": 10,
+      "points": 2
+    },
+    {
+      "name": "API Tests - HelperMethods - 1 Mark",
+      "setup": "",
+      "run": "gradle test --tests 'LegoSetAPITest$HelperMethods'",
+      "input": "",
+      "output": "",
+      "comparison": "included",
+      "timeout": 10,
+      "points": 1
+    }
+  ]
+}
