@@ -1,4 +1,6 @@
 package models;
+import java.util.ArrayList;
+import java.util.Objects;
 
 
 public class LegoSet {
@@ -9,10 +11,132 @@ public class LegoSet {
     //     When updating an existing lego set, only update the name if it is 35 characters or less.
 
 
-    // TODO The code field (int) must be between 10000 and 99999 (both inclusive).  Default value is 10000.
+    private String name;
 
+    // TODO The code field (int) must be between 10000 and 99999 (both inclusive).  Default value is 10000.
+    private int code;
 
     //TODO The cost field (double) must be greater than zero.  The default value is MAX_VALUE for Double.
+    private double cost;
+    private int pieceCount;
+    private boolean inStock;
+    private String theme;
+    private int minimumAge;
+    private ArrayList<InstructionBooklet> instructionBooklets;
+
+    public LegoSet(String name, int code, double cost, int pieceCount, String theme, int minimumAge) {
+        this.name = name;
+        this.code = code;
+        this.cost = cost;
+        this.pieceCount = pieceCount;
+        this.theme = theme;
+        this.minimumAge = minimumAge;
+        this.instructionBooklets = new ArrayList<>();
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public int getCode() {
+        return code;
+    }
+
+    public void setCode(int code) {
+        this.code = code;
+    }
+
+    public double getCost() {
+        return cost;
+    }
+
+    public void setCost(double cost) {
+        this.cost = cost;
+    }
+
+    public int getPieceCount() {
+        return pieceCount;
+    }
+
+    public void setPieceCount(int pieceCount) {
+        this.pieceCount = pieceCount;
+    }
+
+    public boolean isInStock() {
+        return inStock;
+    }
+
+    public void setInStock(boolean inStock) {
+        this.inStock = inStock;
+    }
+
+    public String getTheme() {
+        return theme;
+    }
+
+    public void setTheme(String theme) {
+        this.theme = theme;
+    }
+
+    public int getMinimumAge() {
+        return minimumAge;
+    }
+
+    public void setMinimumAge(int minimumAge) {
+        this.minimumAge = minimumAge;
+    }
+
+    public ArrayList<InstructionBooklet> getInstructionBooklets() {
+        return instructionBooklets;
+    }
+
+    public void setInstructionBooklets(ArrayList<InstructionBooklet> instructionBooklets) {
+        this.instructionBooklets = instructionBooklets;
+    }
+
+    public int numberOfInstructionBooklets(){
+        return -1;
+    }
+
+    public String toString() {
+        return "";
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        LegoSet legoSet = (LegoSet) o;
+        return code == legoSet.code && Double.compare(legoSet.cost, cost) == 0 && pieceCount == legoSet.pieceCount && inStock == legoSet.inStock && minimumAge == legoSet.minimumAge && name.equals(legoSet.name) && theme.equals(legoSet.theme) && instructionBooklets.equals(legoSet.instructionBooklets);
+    }
+
+    public boolean addInstructionBooklet(InstructionBooklet instructionBooklet){
+        return false;
+    }
+
+    public String listInstructionBooklets() {
+    return "";
+    }
+
+    public String findInstructionBooklet(int dummy4) {
+        return "";
+    }
+
+    public boolean isValidIndex(int index) {
+        return false;
+    }
+
+    public InstructionBooklet deleteInstructionBooklet(int indexToDelete) {
+        return instructionBooklets.remove(indexToDelete);
+    }
+
+    public boolean updateInstructionBooklet(int dummy1, String dummy2, int dummy3) {
+        return false;
+    }
 
 
     //TODO The piece count field (int) must be between 1 and 2000 (both inclusive). The default value is 1.

@@ -3,10 +3,17 @@ package controllers;
 //TODO When you have the code written in this class, write a JavaDoc comment for class and also
 //     for any public methods in this class.
 
+import models.InstructionBooklet;
+import models.LegoSet;
+
+import java.security.PublicKey;
+import java.util.ArrayList;
+
 public class LegoSetAPI {
 
-    //TODO Declare an array list of lego sets
 
+    //TODO Declare an array list of lego sets
+    private ArrayList<LegoSet> legoSets;
     //-------------------------------------
     //  ARRAYLIST CRUD
     //-------------------------------------
@@ -14,8 +21,9 @@ public class LegoSetAPI {
     //TODO Add a method, addLegoSet(LegoSet). The return type is boolean.
     //     This method will add the lego set object, passed as a parameter to the arraylist of lego sets.
     //     If the add was successful, return true, otherwise, return false.
-
-
+    public boolean addLegoSet(LegoSet trainStation) {
+        return false;
+    }
     //TODO Add a method, updateLegoSet(int, String, int, double, int, String, int).  The return type is boolean.
     //     This method takes in, as the first parameter, the index of the lego set object that you want to update.
     //     If the index is invalid (i.e. there is no lego set object at that location), return false.
@@ -23,12 +31,18 @@ public class LegoSetAPI {
     //     i.e. they hold the name, code, cost, pieceCount, theme and minimum age).
     //     If the update was successful, then return true.
 
+    public boolean updateLegoSet(int dummy, String dummy1, int dummy2, double hello, int hiya, String hint, int kolo) {
+        return false;
+    }
+
 
     //TODO Add a method, deleteLegoSet(int).  The return type is LegoSet.
     //     This method takes in the index of the lego set object that you want to delete.
     //     If the index is invalid (i.e. there is no lego set object at that location), return null.
     //     If the index is valid, remove the object at that index location.  Return the object you just deleted.
-
+    public LegoSet deleteLegoSet(int dummy) {
+        return null;
+    }
 
     //-------------------------------------
     //  ARRAYLIST - Stock Status Update
@@ -41,7 +55,9 @@ public class LegoSetAPI {
     //        If the object is not in stock, set it to being in stock and return true.
     //        If the object is already in stock, return false.
 
-
+    public boolean setLegoSetInStock(int dummy) {
+        return false;
+    }
     //TODO Add a method, setLegoSetOutOfStock(int).  The return type is boolean.
     //     This method takes in the index of the lego set object that you want to update.
     //     If the index is invalid (i.e. there is no lego set object at that location), return false.
@@ -49,23 +65,32 @@ public class LegoSetAPI {
     //        If the object is already in stock, set it to being out of stock and return true.
     //        If the object is not in stock, return false.
 
-
-    //-------------------------------------
+    public boolean setLegoSetOutOfStock(int hello) {
+        return false;
+    }
+    //------------------------------------
     //  Counting Methods - Basic
     //-------------------------------------
 
     //TODO Add a method, numberOfLegoSets().  The return type is int.
     //     This method returns the number of lego set objects currently stored in the array list.
 
-
+    public int numberOfLegoSets() {
+        return -1;
+    }
     //TODO Add a method, numberOfLegoSetsInStock().  The return type is int.
     //     This method returns the number of lego set objects in the array list that are in currently in stock.
 
+    public int numberOfLegoSetsInStock() {
+        return -1;
+    }
 
     //TODO Add a method, numberOfLegoSetsOutOfStock().  The return type is int.
     //     This method returns the number of lego set objects in the array list that are out of stock.
 
-
+    public int numberOfLegoSetsOutOfStock() {
+        return -1;
+    }
     //-------------------------------------
     //  Counting Methods - Advanced
     //-------------------------------------
@@ -74,16 +99,26 @@ public class LegoSetAPI {
     //     This method returns the number of lego set objects in the array list that match the
     //     theme (i.e. the parameter value).
 
+    public int numberOfLegoSetsByTheme(String fummy) {
+        return -1;
+    }
+
 
     //TODO Add a method, numberOfLegoSetsForAgeRatingAndAbove(int).  The return type is int.
     //     This method returns the number of lego set objects in the array list that are equal to
     //     or above the age passed as a parameter value.
 
+    public int numberOfLegoSetsForAgeRatingAndAbove(int dummy){
+        return -1;
+    }
 
     //TODO Add a method, totalNumberOfInstructionBooklets().  The return type is int.
     //     This method returns the total number of instruction booklets across all the lego set objects
     //     currently stored in the array list.
 
+    public int totalNumberOfInstructionBooklets(){
+        return -2;
+    }
 
     //------------------------------------
     // LISTING METHODS - Basic
@@ -96,6 +131,9 @@ public class LegoSetAPI {
     //        1: Lego Set 2 Details
     //    If there are no lego sets stored in the array list, return a string that contains "No Lego sets".
 
+    public String listAllLegoSets() {
+        return "";
+    }
 
     //TODO Add a method, listLegoSetsInStock().  The return type is String.
     //     This method returns a list of the IN STOCK lego sets stored in the array list.
@@ -105,6 +143,9 @@ public class LegoSetAPI {
     //    If there are no IN STOCK lego sets stored in the array list, the return string should
     //    have "No Lego sets in stock".
 
+    public String listLegoSetsInStock() {
+        return "String";
+    }
 
     //TODO Add a method, listLegoSetsOutOfStock().  The return type is String.
     //     This method returns a list of the OUT OF STOCK lego sets stored in the array list.
@@ -114,7 +155,9 @@ public class LegoSetAPI {
     //    If there are no OUT OF STOCK lego sets stored in the array list, the return string should
     //        have "No Lego sets are out of stock".
 
-
+    public String listLegoSetsOutOfStock() {
+        return "helloworld";
+    }
     //------------------------------------
     // LISTING METHODS - Advanced
     //------------------------------------
@@ -129,6 +172,9 @@ public class LegoSetAPI {
     //    If there are no lego sets matching the theme, the return string should have "No Lego sets with theme".
 
 
+    public String listLegoSetsBySpecificTheme(String dummy) {
+        return "";
+    }
     //TODO Add a method, listLegoSetsForAgeRatingAndAbove(int).  The return type is String.
     //    This method returns a list of the lego sets that are equal or above the age supplied as a parameter.
     //     Each matching lego set should be on a new line and should be preceded by the index number e.g.
@@ -137,7 +183,9 @@ public class LegoSetAPI {
     //    If there are no lego sets stored in the array list, return a string that contains "No Lego sets".
     //    If there are no lego sets equal or above the age, the return string should have "No Lego sets available".
 
-
+    public String listLegoSetsForAgeRatingAndAbove(int dummy) {
+        return "";
+    }
     //TODO Add a method, listAllInstructionBooklets().  The return type is String.
     //    This method returns a list of all the instruction booklets across all the lego set objects
     //    stored in the array list.
@@ -147,6 +195,9 @@ public class LegoSetAPI {
     //       Instructions1.pdf (Titanic, 54655)
     //    If there are no lego sets stored in the array list, return a string that contains "No Lego sets".
 
+    public String listAllInstructionBooklets() {
+        return "";
+    }
 
     //TODO Add a method, listStockStatusBySpecificTheme(String).  The return type is String.
     //    This method returns a report (the returned String) of the stock status of the lego sets in a specific theme.
@@ -158,7 +209,9 @@ public class LegoSetAPI {
     //    If there are no lego sets stored in the array list, return a string that contains "No Lego sets".
     //    If there are no lego sets matching the theme, the return string should have "No Lego sets with theme".
 
-
+    public String listStockStatusBySpecificTheme(String dummy) {
+        return "";
+    }
     //------------------------------
     //  FINDING METHODS
     //-------------------------------
@@ -167,7 +220,9 @@ public class LegoSetAPI {
     //    This method returns the lego set stored at the index that was passed as a parameter.
     //    However, if the index is not valid, null is returned.
 
-
+    public LegoSet findLegoSet(int dummy) {
+        return null;
+    }
     //TODO Add a method, findLegoSetByCode(int).  The return type is LegoSet.
     //    This method searches the array list for a lego set with a specific code (passed as a parameter).
     //    When a lego set is found for this code, it is returned back.
@@ -175,7 +230,9 @@ public class LegoSetAPI {
     // NOTE: the first lego set encountered is returned, even if more exist with that code.  For extra credit,
     //       you could add in validation to ensure that the code is unique when adding a LegoSet.
 
-
+    public LegoSet findLegoSetByCode(int hello) {
+        return null;
+    }
     //------------------------------
     //  SEARCHING METHODS
     //-------------------------------
@@ -190,6 +247,9 @@ public class LegoSetAPI {
     //    have "No Lego sets found".
 
 
+        public String searchLegoSetsByName(String thing) {
+        return "";
+        }
     //TODO Add a method, searchInstructionBookletsByFileName(String).  The return type is String.
     //    This method returns a list of instruction booklets whose file name contains the string passed
     //    as a parameter.
@@ -200,6 +260,9 @@ public class LegoSetAPI {
     //    If there are no lego sets whose name contains the supplied string, the return string should
     //    have "No instruction booklets found".
 
+     public String searchInstructionBookletsByFileName(String dummy) {
+        return "";
+     }
 
     //-------------------------
     // HELPER METHODS
@@ -209,6 +272,9 @@ public class LegoSetAPI {
     //    This method returns true if the value passed as a parameter is a valid index in the arraylist.
     //    However, if the index is not valid, false is returned.
 
+    public boolean isValidIndex(int dummy) {
+        return false;
+    }
 
     //-------------------------
     // PERSISTENCE METHODS
@@ -218,10 +284,16 @@ public class LegoSetAPI {
     //    This method uses the XStream component to deserialise the lego sets and their associated booklets from
     //    an XML file into the legoSets array list.
 
+    public void load() {
+
+    }
 
     //TODO Add a method, save().  The return type is void.
     //    This method uses the XStream component to serialise the lego sets and their associated booklets to
     //    an XML file.
 
+    public void save() {
+
+    }
 }
 

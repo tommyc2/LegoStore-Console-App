@@ -3,7 +3,29 @@ package models;
 public class InstructionBooklet {
 
     //TODO The number of pages (int) is between 1 and 80 (both inclusive).  Default is 1.
+    private int numberOfPages;
+    private String fileName;
 
+    public InstructionBooklet(int numberOfPages, String filename) {
+        this.numberOfPages = numberOfPages;
+        this.fileName = filename;
+    }
+
+    public int getNumberOfPages() {
+        return numberOfPages;
+    }
+
+    public void setNumberOfPages(int numberOfPages) {
+        this.numberOfPages = numberOfPages;
+    }
+
+    public String getFileName() {
+        return fileName;
+    }
+
+    public void setFileName(String filename) {
+        this.fileName = filename;
+    }
 
     //TODO The file name (String) of the booklet in the system is entered by the user.
     //     Default value is "".
