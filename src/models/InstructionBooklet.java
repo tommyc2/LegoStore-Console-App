@@ -1,14 +1,24 @@
 package models;
 
+import utils.Utilities;
+
+import java.util.Objects;
+
 public class InstructionBooklet {
 
-    //TODO The number of pages (int) is between 1 and 80 (both inclusive).  Default is 1.
-    private int numberOfPages;
-    private String fileName;
+    private int numberOfPages = 1;
+    private String fileName = "";
 
     public InstructionBooklet(int numberOfPages, String filename) {
-        this.numberOfPages = numberOfPages;
-        this.fileName = filename;
+       setNumberOfPages(numberOfPages);
+
+       if (Utilities.validStringlength(filename, 20)) {
+           this.fileName = filename;
+       }
+       else {
+           this.fileName = Utilities.truncateString(filename, 20);
+       }
+
     }
 
     public int getNumberOfPages() {
@@ -16,7 +26,9 @@ public class InstructionBooklet {
     }
 
     public void setNumberOfPages(int numberOfPages) {
-        this.numberOfPages = numberOfPages;
+        if (Utilities.validRange(numberOfPages,0,80)){
+            this.numberOfPages = numberOfPages;
+        }
     }
 
     public String getFileName() {
@@ -24,23 +36,18 @@ public class InstructionBooklet {
     }
 
     public void setFileName(String filename) {
-        this.fileName = filename;
+        if (Utilities.validStringlength(filename, 20)) {
+            this.fileName = filename;
+        }
     }
 
-    //TODO The file name (String) of the booklet in the system is entered by the user.
-    //     Default value is "".
-    //     When creating the booklet, truncate the name to 20 characters.
-    //     When updating an existing booklet, only update the name if it is 20 characters or less.
-
-
-    //TODO Add the constructor, InstructionBooklet(int, String), that adheres to the above validation rules
-
-
-    //TODO Add a getter and setter for each field, that adheres to the above validation rules
-
-
-    //TODO Add a generated equals method.
-
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        InstructionBooklet that = (InstructionBooklet) o;
+        return numberOfPages == that.numberOfPages && fileName.equals(that.fileName);
+    }
 
     //TODO The toString should return the string in this format:
     //      legobooklet1.pdf (5 pages)  OR
@@ -49,4 +56,13 @@ public class InstructionBooklet {
     //  NOTE: .pdf is added to the actual file name if the user hasn't added it themselves.
     //  NOTE: "pages" is added to the number of pages when it is not equal 1, "page" otherwise.
 
+
+    @Override
+    public String toString() {
+        String toString = "";
+
+
+    return toString;
+
+    }
 }

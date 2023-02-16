@@ -7,6 +7,10 @@ public class Driver {
         new Driver();
     }
 
+    public Driver() {
+
+    }
+
     //TODO Refer to the tutors instructions for building this class.  You are free to deviate in any way
     //     from the Driver menu that is in the tutors instructions, once you have these included:
     //       - CRUD on LegoSet
