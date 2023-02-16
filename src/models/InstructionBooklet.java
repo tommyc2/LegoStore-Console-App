@@ -58,11 +58,33 @@ public class InstructionBooklet {
 
 
     @Override
-    public String toString() {
-        String toString = "";
+    public String toString()
+    {
+        String str = "";
+
+        str += "--- Instruction Booklet ---" + "\n";
+        str += "Filename: ";
+
+      if (this.fileName.endsWith(".pdf")) {
+          str += this.fileName;
+      }
+      if (!this.fileName.endsWith(".pdf")) {
+            str += this.fileName + ".pdf";
+        }
+
+        str += "\n" + "Number of Pages: ";
+
+      if (this.numberOfPages != 1) {
+          str += "(" + numberOfPages + " pages" + ")";
+      }
+
+        else {
+            str += "(" + numberOfPages + " page" + ")";
+        }
+
+        return str;
 
 
-    return toString;
 
     }
 }
