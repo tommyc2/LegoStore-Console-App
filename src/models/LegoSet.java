@@ -11,17 +11,17 @@ public class LegoSet {
     //     When updating an existing lego set, only update the name if it is 35 characters or less.
 
 
-    private String name;
+    private String name = "";
 
     // TODO The code field (int) must be between 10000 and 99999 (both inclusive).  Default value is 10000.
-    private int code;
+    private int code = 10000;
 
     //TODO The cost field (double) must be greater than zero.  The default value is MAX_VALUE for Double.
-    private double cost;
-    private int pieceCount;
-    private boolean inStock;
-    private String theme;
-    private int minimumAge;
+    private double cost = MAX_VALUE;
+    private int pieceCount = 1;
+    private boolean inStock = true;
+    private String theme = "Classic";
+    private int minimumAge = 4;
     private ArrayList<InstructionBooklet> instructionBooklets;
 
     public LegoSet(String name, int code, double cost, int pieceCount, String theme, int minimumAge) {
