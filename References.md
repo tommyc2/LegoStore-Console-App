@@ -1,5 +1,14 @@
-# References List - by Tommy Condon W2
+# References List
 
-# InstructionBooklet.java
+### InstructionBooklet.java
 - https://www.w3schools.com/jsref/jsref_endswith.asp
+
+### LegoSet.java
+
+### LegoSet.java
+
+### LegoSetAPI.java
+
+### Driver.java
+
 
