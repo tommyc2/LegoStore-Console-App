@@ -1,22 +1,14 @@
 package models;
+import utils.Utilities;
+
 import java.util.ArrayList;
 import java.util.Objects;
 
 
 public class LegoSet {
 
-    // TODO The lego set name field (String) has a maximum 35 chars.
-    //     Default value is "".
-    //     When creating the lego set, truncate the name to 35 characters.
-    //     When updating an existing lego set, only update the name if it is 35 characters or less.
-
-
     private String name = "";
-
-    // TODO The code field (int) must be between 10000 and 99999 (both inclusive).  Default value is 10000.
     private int code = 10000;
-
-    //TODO The cost field (double) must be greater than zero.  The default value is MAX_VALUE for Double.
     private double cost = MAX_VALUE;
     private int pieceCount = 1;
     private boolean inStock = true;
@@ -25,13 +17,18 @@ public class LegoSet {
     private ArrayList<InstructionBooklet> instructionBooklets;
 
     public LegoSet(String name, int code, double cost, int pieceCount, String theme, int minimumAge) {
-        this.name = name;
-        this.code = code;
-        this.cost = cost;
-        this.pieceCount = pieceCount;
-        this.theme = theme;
-        this.minimumAge = minimumAge;
-        this.instructionBooklets = new ArrayList<>();
+
+        if (Utilities.validStringlength(name,35)) {
+            this.name = name;
+        }
+        else {
+            this.name = Utilities.truncateString(name,35);
+        }
+        setCode(code);
+        setCost(cost);
+        setPieceCount(pieceCount);
+        setTheme(theme);
+        setMinimumAge(minimumAge);
     }
 
     public String getName() {
@@ -39,7 +36,9 @@ public class LegoSet {
     }
 
     public void setName(String name) {
-        this.name = name;
+        if (Utilities.validStringlength(name,35)) {
+            this.name = name;
+        }
     }
 
     public int getCode() {
@@ -47,7 +46,9 @@ public class LegoSet {
     }
 
     public void setCode(int code) {
-        this.code = code;
+        if (Utilities.validRange(code, 10000,99999)) {
+            this.code = code;
+        }
     }
 
     public double getCost() {
@@ -55,7 +56,9 @@ public class LegoSet {
     }
 
     public void setCost(double cost) {
-        this.cost = cost;
+        if (cost > 0) {
+            this.cost = cost;
+        }
     }
 
     public int getPieceCount() {
@@ -63,7 +66,9 @@ public class LegoSet {
     }
 
     public void setPieceCount(int pieceCount) {
-        this.pieceCount = pieceCount;
+        if (Utilities.validRange(pieceCount,1,2000)) {
+            this.pieceCount = pieceCount;
+        }
     }
 
     public boolean isInStock() {
@@ -137,10 +142,6 @@ public class LegoSet {
     public boolean updateInstructionBooklet(int dummy1, String dummy2, int dummy3) {
         return false;
     }
-
-
-    //TODO The piece count field (int) must be between 1 and 2000 (both inclusive). The default value is 1.
-
 
     //TODO The in stock field (boolean) has a default of true i.e. it is in stock.
 

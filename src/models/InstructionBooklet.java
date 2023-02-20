@@ -19,7 +19,6 @@ public class InstructionBooklet {
         }
 
     }
-
     public int getNumberOfPages() {
         return numberOfPages;
     }
