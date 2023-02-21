@@ -1,8 +1,8 @@
 package models;
 import utils.Utilities;
-
 import java.util.ArrayList;
 import java.util.Objects;
+import static java.lang.Double.MAX_VALUE;
 
 
 public class LegoSet {
@@ -158,17 +158,29 @@ public class LegoSet {
 
     @Override
     public String toString() {
-        return "---- LegoSet ----" + "\n" +
+        String toString =  "---- LegoSet ----" + "\n" +
                 " | Name = " + name + "\n" +
                 " | Code = " + code + "\n" +
-                " | Cost = " + cost + "\n" +
-                " | Piece Count=" + pieceCount + "\n" +
+                " | Cost = " + "€"+ cost + "\n" +
+                " | Piece Count = " + pieceCount + "\n" +
                 " | Availability = " + inStock + "\n" +
                 " | Theme = " + theme + "\n" +
-                " | Minimum Age for use =" + minimumAge + "\n" +
-                " | Instruction Booklets = " + instructionBooklets + "\n"
-                ;
+                " | Minimum Age for use = " + minimumAge + "\n";
+
+        toString += "--- Instruction Booklets ---" + "\n";
+
+        int total = instructionBooklets.size();
+        for (int i = 0; i < total; i++) {
+            toString += "[" + i + "]" + instructionBooklets + ".pdf" + "\n";
+        }
+        return toString;
     }
+
+
+
+
+                ;
+
 
 
     //-------------------
