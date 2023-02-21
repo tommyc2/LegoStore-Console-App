@@ -29,8 +29,6 @@ public class LegoSet {
         setPieceCount(pieceCount);
         setTheme(theme);
         setMinimumAge(minimumAge);
-
-        instructionBooklets = new ArrayList<>();
     }
 
     public String getName() {
