@@ -29,6 +29,8 @@ public class LegoSet {
         setPieceCount(pieceCount);
         setTheme(theme);
         setMinimumAge(minimumAge);
+
+        instructionBooklets = new ArrayList<>();
     }
 
     public String getName() {
@@ -108,7 +110,7 @@ public class LegoSet {
     }
 
     public int numberOfInstructionBooklets(){
-        return -1;
+        return instructionBooklets.size();
     }
 
     @Override
@@ -120,7 +122,7 @@ public class LegoSet {
     }
 
     public boolean addInstructionBooklet(InstructionBooklet instructionBooklet){
-        return false;
+        return instructionBooklets.add(instructionBooklet);
     }
 
     public String listInstructionBooklets() {
@@ -142,10 +144,6 @@ public class LegoSet {
     public boolean updateInstructionBooklet(int dummy1, String dummy2, int dummy3) {
         return false;
     }
-
-
-    //TODO - When minimumAge,the value is being returned in toString, a plus should be added beside it i.e. 9+, 4+
-
     //TODO Add the usual toString method (return type is String).
     //     An example of the format of the String being returned would be:
     //     Train Station, City theme (60335) 907 pieces. €99.99 (in stock). Age: 9+.
@@ -165,7 +163,7 @@ public class LegoSet {
                 " | Piece Count = " + pieceCount + "\n" +
                 " | Availability = " + inStock + "\n" +
                 " | Theme = " + theme + "\n" +
-                " | Minimum Age for use = " + minimumAge + "\n";
+                " | Minimum Age for use = " + minimumAge + "+" + "\n";
 
         toString += "--- Instruction Booklets ---" + "\n";
 
@@ -175,26 +173,6 @@ public class LegoSet {
         }
         return toString;
     }
-
-
-
-
-                ;
-
-
-
-    //-------------------
-    // ArrayList handling
-    //-------------------
-
-    //TODO numberOfInstructionBooklets(): Add this method that has a return type of int.
-    //     It should return the number of items stored in the ArrayList.
-
-
-    // TODO addInstructionBooklet(InstructionBooklet):  Add a method that will add an instruction booklet to
-    //      the ArrayList. The return type of this method is boolean.  The method should return true if
-    //      successful, false otherwise.
-
 
     // TODO listInstructionBooklets(): Add a method that will return a list all of the instruction booklets (return
     //      type of this method is String).  Each booklet should be on it's own line and should be preceded with
