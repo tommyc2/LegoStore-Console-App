@@ -84,7 +84,9 @@ public class LegoSet {
     }
 
     public void setTheme(String theme) {
-        this.theme = theme;
+        if (theme == "Classic" || theme == "City" || theme == "Creator" || theme == "Friends") {
+            this.theme = theme;
+        }
     }
 
     public int getMinimumAge() {
@@ -92,7 +94,9 @@ public class LegoSet {
     }
 
     public void setMinimumAge(int minimumAge) {
-        this.minimumAge = minimumAge;
+        if (minimumAge == 4 || minimumAge == 6 || minimumAge == 9 || minimumAge == 10 || minimumAge == 13 || minimumAge == 18) {
+            this.minimumAge = minimumAge;
+        }
     }
 
     public ArrayList<InstructionBooklet> getInstructionBooklets() {
@@ -105,10 +109,6 @@ public class LegoSet {
 
     public int numberOfInstructionBooklets(){
         return -1;
-    }
-
-    public String toString() {
-        return "";
     }
 
     @Override
@@ -143,31 +143,8 @@ public class LegoSet {
         return false;
     }
 
-    //TODO The in stock field (boolean) has a default of true i.e. it is in stock.
 
-
-    //TODO The theme field (String) has valid values of Classic, City, Creator, or Friends.
-    //     The default value is "Classic";
-
-
-    //TODO The minimum age field (int) has valid values of 4, 6, 9, 10, 13 or 18.
-    //     The default value is 4;
-    //     When the value is being returned in toString, a plus should be added beside it i.e. 9+, 4+
-
-
-    //TODO The instruction booklets field is an ArrayList of InstructionBooket objects.
-
-
-    //TODO Add the constructor, LegoSet(String, int, double, int, String, int), that adheres to the above validation rules.
-    //     The order of the fields in the parameter list is the same as the order of fields above i.e. name is
-    //     first, then code, then cost, and so on.
-
-
-    //TODO Add a getter and setter for each field, that adheres to the above validation rules.
-
-
-    //TODO Add a generated equals method.
-
+    //TODO - When minimumAge,the value is being returned in toString, a plus should be added beside it i.e. 9+, 4+
 
     //TODO Add the usual toString method (return type is String).
     //     An example of the format of the String being returned would be:
@@ -178,6 +155,20 @@ public class LegoSet {
     //    OR
     //     Lunar Space Station, Classic theme (60349) 500 pieces. €79.99 (not available). Age: 10+
     //         No Instruction Booklets
+
+    @Override
+    public String toString() {
+        return "---- LegoSet ----" + "\n" +
+                " | Name = " + name + "\n" +
+                " | Code = " + code + "\n" +
+                " | Cost = " + cost + "\n" +
+                " | Piece Count=" + pieceCount + "\n" +
+                " | Availability = " + inStock + "\n" +
+                " | Theme = " + theme + "\n" +
+                " | Minimum Age for use =" + minimumAge + "\n" +
+                " | Instruction Booklets = " + instructionBooklets + "\n"
+                ;
+    }
 
 
     //-------------------
