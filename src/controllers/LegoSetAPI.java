@@ -10,41 +10,37 @@ import java.security.PublicKey;
 import java.util.ArrayList;
 
 public class LegoSetAPI {
-
-
-    //TODO Declare an array list of lego sets
     private ArrayList<LegoSet> legoSets;
+
+    public LegoSetAPI() {
+        legoSets = new ArrayList<LegoSet>();
+    }
+
 
     public boolean addLegoSet(LegoSet legoSet) {
         return legoSets.add(legoSet);
     }
-    //TODO Add a method, updateLegoSet(int, String, int, double, int, String, int).  The return type is boolean.
-    //     This method takes in, as the first parameter, the index of the lego set object that you want to update.
-    //     If the index is invalid (i.e. there is no lego set object at that location), return false.
-    //     The remaining parameters hold the new data for each of the fields in LegoSet that are being updated
-    //     i.e. they hold the name, code, cost, pieceCount, theme and minimum age).
-    //     If the update was successful, then return true.
 
-    public boolean updateLegoSet(int indexToUpdate, String updatedName, int updatedCode, double updatedCost, int updatedPieceCount , String updatedTheme, int updatedMinimumAge) {
+    public boolean updateLegoSet(int indexToUpdate, String updatedName, int updatedCode, double updatedCost, int updatedPieceCount, String updatedTheme, int updatedMinimumAge) {
         LegoSet locatedLegoSet = findLegoSet(indexToUpdate);
 
         if (locatedLegoSet != null) {
-            return false;
+            locatedLegoSet.setName(updatedName);
+            locatedLegoSet.setCode(updatedCode);
+            locatedLegoSet.setCost(updatedCost);
+            locatedLegoSet.setPieceCount(updatedPieceCount);
+            locatedLegoSet.setTheme(updatedTheme);
+            locatedLegoSet.setMinimumAge(updatedMinimumAge);
+            return true;
         }
+        return false;
     }
-
-
-    //TODO Add a method, deleteLegoSet(int).  The return type is LegoSet.
-    //     This method takes in the index of the lego set object that you want to delete.
-    //     If the index is invalid (i.e. there is no lego set object at that location), return null.
-    //     If the index is valid, remove the object at that index location.  Return the object you just deleted.
-    public LegoSet deleteLegoSet(int dummy) {
+    public LegoSet deleteLegoSet(int indexToDelete) {
+        if (isValidIndex(indexToDelete)) {
+            legoSets.remove(indexToDelete);
+        }
         return null;
     }
-
-    //-------------------------------------
-    //  ARRAYLIST - Stock Status Update
-    //-------------------------------------
 
     //TODO Add a method, setLegoSetInStock(int).  The return type is boolean.
     //     This method takes in the index of the lego set object that you want to update.
@@ -53,7 +49,18 @@ public class LegoSetAPI {
     //        If the object is not in stock, set it to being in stock and return true.
     //        If the object is already in stock, return false.
 
-    public boolean setLegoSetInStock(int dummy) {
+    public boolean setLegoSetInStock(int indexToUpdate) {
+        if (isValidIndex(indexToUpdate)) {
+            LegoSet foundLegoSet = legoSets.get(indexToUpdate);
+
+            if (foundLegoSet.isInStock()) {
+                return false;
+            }
+            else {
+                foundLegoSet.setInStock(true);
+                return true;
+            }
+        }
         return false;
     }
     //TODO Add a method, setLegoSetOutOfStock(int).  The return type is boolean.
@@ -266,12 +273,8 @@ public class LegoSetAPI {
     // HELPER METHODS
     //-------------------------
 
-    //TODO Add a method, isValidIndex(int).  The return type is boolean.
-    //    This method returns true if the value passed as a parameter is a valid index in the arraylist.
-    //    However, if the index is not valid, false is returned.
-
-    public boolean isValidIndex(int dummy) {
-        return false;
+    public boolean isValidIndex(int index) {
+        return (index >= 0) && (index < legoSets.size());
     }
 
     //-------------------------
