@@ -14,15 +14,9 @@ public class LegoSetAPI {
 
     //TODO Declare an array list of lego sets
     private ArrayList<LegoSet> legoSets;
-    //-------------------------------------
-    //  ARRAYLIST CRUD
-    //-------------------------------------
 
-    //TODO Add a method, addLegoSet(LegoSet). The return type is boolean.
-    //     This method will add the lego set object, passed as a parameter to the arraylist of lego sets.
-    //     If the add was successful, return true, otherwise, return false.
-    public boolean addLegoSet(LegoSet trainStation) {
-        return false;
+    public boolean addLegoSet(LegoSet legoSet) {
+        return legoSets.add(legoSet);
     }
     //TODO Add a method, updateLegoSet(int, String, int, double, int, String, int).  The return type is boolean.
     //     This method takes in, as the first parameter, the index of the lego set object that you want to update.
@@ -31,8 +25,12 @@ public class LegoSetAPI {
     //     i.e. they hold the name, code, cost, pieceCount, theme and minimum age).
     //     If the update was successful, then return true.
 
-    public boolean updateLegoSet(int dummy, String dummy1, int dummy2, double hello, int hiya, String hint, int kolo) {
-        return false;
+    public boolean updateLegoSet(int indexToUpdate, String updatedName, int updatedCode, double updatedCost, int updatedPieceCount , String updatedTheme, int updatedMinimumAge) {
+        LegoSet locatedLegoSet = findLegoSet(indexToUpdate);
+
+        if (locatedLegoSet != null) {
+            return false;
+        }
     }
 
 
@@ -108,7 +106,7 @@ public class LegoSetAPI {
     //     This method returns the number of lego set objects in the array list that are equal to
     //     or above the age passed as a parameter value.
 
-    public int numberOfLegoSetsForAgeRatingAndAbove(int dummy){
+    public int numberOfLegoSetsForAgeRatingAndAbove(int dummy) {
         return -1;
     }
 
@@ -116,7 +114,7 @@ public class LegoSetAPI {
     //     This method returns the total number of instruction booklets across all the lego set objects
     //     currently stored in the array list.
 
-    public int totalNumberOfInstructionBooklets(){
+    public int totalNumberOfInstructionBooklets() {
         return -2;
     }
 
@@ -247,9 +245,9 @@ public class LegoSetAPI {
     //    have "No Lego sets found".
 
 
-        public String searchLegoSetsByName(String thing) {
+    public String searchLegoSetsByName(String thing) {
         return "";
-        }
+    }
     //TODO Add a method, searchInstructionBookletsByFileName(String).  The return type is String.
     //    This method returns a list of instruction booklets whose file name contains the string passed
     //    as a parameter.
@@ -260,9 +258,9 @@ public class LegoSetAPI {
     //    If there are no lego sets whose name contains the supplied string, the return string should
     //    have "No instruction booklets found".
 
-     public String searchInstructionBookletsByFileName(String dummy) {
+    public String searchInstructionBookletsByFileName(String dummy) {
         return "";
-     }
+    }
 
     //-------------------------
     // HELPER METHODS
