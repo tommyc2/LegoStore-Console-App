@@ -1,4 +1,7 @@
 package models;
+
+import utils.MinimumAgeUtility;
+import utils.ThemeUtility;
 import utils.Utilities;
 import java.util.ArrayList;
 import java.util.Objects;
@@ -18,17 +21,18 @@ public class LegoSet {
 
     public LegoSet(String name, int code, double cost, int pieceCount, String theme, int minimumAge) {
 
-        if (Utilities.validStringlength(name,35)) {
+        if (Utilities.validStringlength(name, 35)) {
             this.name = name;
-        }
-        else {
-            this.name = Utilities.truncateString(name,35);
+        } else {
+            this.name = Utilities.truncateString(name, 35);
         }
         setCode(code);
         setCost(cost);
         setPieceCount(pieceCount);
         setTheme(theme);
         setMinimumAge(minimumAge);
+
+        instructionBooklets = new ArrayList<>();
     }
 
     public String getName() {
@@ -36,7 +40,7 @@ public class LegoSet {
     }
 
     public void setName(String name) {
-        if (Utilities.validStringlength(name,35)) {
+        if (Utilities.validStringlength(name, 35)) {
             this.name = name;
         }
     }
@@ -46,7 +50,7 @@ public class LegoSet {
     }
 
     public void setCode(int code) {
-        if (Utilities.validRange(code, 10000,99999)) {
+        if (Utilities.validRange(code, 10000, 99999)) {
             this.code = code;
         }
     }
@@ -66,7 +70,7 @@ public class LegoSet {
     }
 
     public void setPieceCount(int pieceCount) {
-        if (Utilities.validRange(pieceCount,1,2000)) {
+        if (Utilities.validRange(pieceCount, 1, 2000)) {
             this.pieceCount = pieceCount;
         }
     }
@@ -84,7 +88,7 @@ public class LegoSet {
     }
 
     public void setTheme(String theme) {
-        if (theme == "Classic" || theme == "City" || theme == "Creator" || theme == "Friends") {
+        if (ThemeUtility.isValidTheme(theme)) {
             this.theme = theme;
         }
     }
@@ -94,7 +98,7 @@ public class LegoSet {
     }
 
     public void setMinimumAge(int minimumAge) {
-        if (minimumAge == 4 || minimumAge == 6 || minimumAge == 9 || minimumAge == 10 || minimumAge == 13 || minimumAge == 18) {
+        if (MinimumAgeUtility.isValidAge(minimumAge)) {
             this.minimumAge = minimumAge;
         }
     }
@@ -107,7 +111,7 @@ public class LegoSet {
         this.instructionBooklets = instructionBooklets;
     }
 
-    public int numberOfInstructionBooklets(){
+    public int numberOfInstructionBooklets() {
         return instructionBooklets.size();
     }
 
@@ -119,90 +123,78 @@ public class LegoSet {
         return code == legoSet.code && Double.compare(legoSet.cost, cost) == 0 && pieceCount == legoSet.pieceCount && inStock == legoSet.inStock && minimumAge == legoSet.minimumAge && name.equals(legoSet.name) && theme.equals(legoSet.theme) && instructionBooklets.equals(legoSet.instructionBooklets);
     }
 
-    public boolean addInstructionBooklet(InstructionBooklet instructionBooklet){
+    public boolean addInstructionBooklet(InstructionBooklet instructionBooklet) {
         return instructionBooklets.add(instructionBooklet);
     }
 
-    public String listInstructionBooklets() {
-    return "";
-    }
-
-    public String findInstructionBooklet(int dummy4) {
-        return "";
+    public InstructionBooklet findInstructionBooklet(int bookletNum) {
+        if (isValidIndex(bookletNum)) {
+            return instructionBooklets.get(bookletNum);
+        }
+        return null;
     }
 
     public boolean isValidIndex(int index) {
-        return false;
+        return (index >= 0) && (index < instructionBooklets.size());
     }
 
     public InstructionBooklet deleteInstructionBooklet(int indexToDelete) {
-        return instructionBooklets.remove(indexToDelete);
+        if (isValidIndex(indexToDelete)) {
+            return instructionBooklets.remove(indexToDelete);
+        }
+        return null;
     }
-
-    public boolean updateInstructionBooklet(int dummy1, String dummy2, int dummy3) {
-        return false;
-    }
-    //TODO Add the usual toString method (return type is String).
-    //     An example of the format of the String being returned would be:
-    //     Train Station, City theme (60335) 907 pieces. €99.99 (in stock). Age: 9+.
-    //         0: InstructionBook1.pdf (6 pages)
-    //         1: InstructionBook2.pdf (0 pages)
-    //         2: InstructionBook3.pdf (1 page)
-    //    OR
-    //     Lunar Space Station, Classic theme (60349) 500 pieces. €79.99 (not available). Age: 10+
-    //         No Instruction Booklets
 
     @Override
     public String toString() {
-        String toString =  "---- LegoSet ----" + "\n" +
+        String toString; // string declaration, then assigning a value to it.
+        toString = "---- LegoSet ----" + "\n" +
                 " | Name = " + name + "\n" +
                 " | Code = " + code + "\n" +
-                " | Cost = " + "€"+ cost + "\n" +
-                " | Piece Count = " + pieceCount + "\n" +
-                " | Availability = " + inStock + "\n" +
+                " | Cost = " + "€" + cost + "\n" +
+                " | " + pieceCount + " pieces" + "\n" +
                 " | Theme = " + theme + "\n" +
                 " | Minimum Age for use = " + minimumAge + "+" + "\n";
+
+        if (this.inStock) {
+            toString += " | Availability = " + inStock + "(in stock)" + "\n";
+        } else {
+            toString += " | Availability = " + inStock + "(not available)" + "\n";
+        }
 
         toString += "--- Instruction Booklets ---" + "\n";
 
         int total = instructionBooklets.size();
-        for (int i = 0; i < total; i++) {
-            toString += "[" + i + "]" + instructionBooklets + ".pdf" + "\n";
+        if (total != 0) {
+            for (int i = 0; i < total; i++) {
+                toString += "[" + i + "]" + instructionBooklets + ".pdf" + "\n";
+            }
+        } else {
+            toString += "No instruction booklets";
         }
         return toString;
     }
 
-    // TODO listInstructionBooklets(): Add a method that will return a list all of the instruction booklets (return
-    //      type of this method is String).  Each booklet should be on it's own line and should be preceded with
-    //      the index number in the array list e.g.
-    //         0: InstructionBook1.pdf (6 pages)
-    //         1: InstructionBook2.pdf (1 page)
-    //         2: InstructionBook3.pdf (2 pages)
+    public String listInstructionBooklets() {
+        if (!instructionBooklets.isEmpty()) {
+            String listOfBooklets = "";
+            for (int i = 0; i < instructionBooklets.size(); i++) {
+                listOfBooklets += i + ": " + instructionBooklets.get(i) + "\n";
+            }
+            return listOfBooklets;
+        } else {
+            return "No Instruction Booklets available!";
+        }
+    }
 
+    public boolean updateInstructionBooklet(int indexOfBooklet, String newFileName, int numOfPages) {
+        InstructionBooklet locatedBooklet = findInstructionBooklet(indexOfBooklet);
 
-    //TODO isValidIndex(int): Add a method that will return true if the value of the index (passed as a
-    //     parameter) is a valid index number in the instruction booklets array list.  If the index is invalid
-    //     return false.  The return type of this method is boolean.
-
-
-    //TODO findInstructionBooklet(int): Add a method that will return the instruction booklet at a specific
-    //     index in the array list.  If the index is invalid, null is returned instead.  The return type of this
-    //     method is InstructionBooklet.
-
-
-    //TODO deleteInstructionBooklet(int): Add a method that will delete the instruction booklet at a specific
-    //     index in the array list.  If the index is invalid, null is returned instead.  The return type of this
-    //     method is InstructionBooklet.
-
-
-    //TODO updateInstructionBooklet(int, String, int): Add a method that will take in three parameters:
-    //     - The first parameter is the index of the instruction booklet in the arraylist.
-    //     - The second parameter is the new value for the filename.
-    //     - The third parameter is the new value for the number of pages.
-    //     The method will update update the fileName and numberOfPages for an instruction booklet at a
-    //     specific index in the array list.
-    //     It will return true if the update was successful. If the index is invalid, false is returned instead.
-    //     The return type of this method is boolean.
-
-
+        if (locatedBooklet != null) {
+            locatedBooklet.setFileName(newFileName);
+            locatedBooklet.setNumberOfPages(numOfPages);
+            return true;
+        }
+        return false;
+    }
 }
