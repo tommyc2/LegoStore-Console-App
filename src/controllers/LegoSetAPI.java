@@ -63,19 +63,20 @@ public class LegoSetAPI {
         }
         return false;
     }
-    //TODO Add a method, setLegoSetOutOfStock(int).  The return type is boolean.
-    //     This method takes in the index of the lego set object that you want to update.
-    //     If the index is invalid (i.e. there is no lego set object at that location), return false.
-    //     If the index is valid, retrieve the object and:
-    //        If the object is already in stock, set it to being out of stock and return true.
-    //        If the object is not in stock, return false.
 
-    public boolean setLegoSetOutOfStock(int hello) {
+    public boolean setLegoSetOutOfStock(int indexOfLegoSet) {
+        if (isValidIndex(indexOfLegoSet)) {
+            LegoSet locatedLegoSet = findLegoSet(indexOfLegoSet);
+            if (locatedLegoSet.isInStock()) {
+                locatedLegoSet.setInStock(false);
+                return true;
+            }
+            else {
+                return false;
+            }
+        }
         return false;
     }
-    //------------------------------------
-    //  Counting Methods - Basic
-    //-------------------------------------
 
     //TODO Add a method, numberOfLegoSets().  The return type is int.
     //     This method returns the number of lego set objects currently stored in the array list.
@@ -217,15 +218,11 @@ public class LegoSetAPI {
     public String listStockStatusBySpecificTheme(String dummy) {
         return "";
     }
-    //------------------------------
-    //  FINDING METHODS
-    //-------------------------------
 
-    //TODO Add a method, findLegoSet(int).  The return type is LegoSet.
-    //    This method returns the lego set stored at the index that was passed as a parameter.
-    //    However, if the index is not valid, null is returned.
-
-    public LegoSet findLegoSet(int dummy) {
+    public LegoSet findLegoSet(int indexOfSet) {
+        if (isValidIndex(indexOfSet)) {
+            return legoSets.get(indexOfSet);
+        }
         return null;
     }
     //TODO Add a method, findLegoSetByCode(int).  The return type is LegoSet.
@@ -238,9 +235,6 @@ public class LegoSetAPI {
     public LegoSet findLegoSetByCode(int hello) {
         return null;
     }
-    //------------------------------
-    //  SEARCHING METHODS
-    //-------------------------------
 
     //TODO Add a method, searchLegoSetsByName(String).  The return type is String.
     //    This method returns a list of the lego sets whose name contains the string passed as a parameter.

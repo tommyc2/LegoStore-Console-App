@@ -32,7 +32,7 @@ public class LegoSet {
         setTheme(theme);
         setMinimumAge(minimumAge);
 
-        instructionBooklets = new ArrayList<>();
+        this.instructionBooklets = new ArrayList<>();
     }
 
     public String getName() {
