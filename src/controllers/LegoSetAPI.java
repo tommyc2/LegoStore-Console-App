@@ -42,13 +42,6 @@ public class LegoSetAPI {
         return null;
     }
 
-    //TODO Add a method, setLegoSetInStock(int).  The return type is boolean.
-    //     This method takes in the index of the lego set object that you want to update.
-    //     If the index is invalid (i.e. there is no lego set object at that location), return false.
-    //     If the index is valid, retrieve the object and:
-    //        If the object is not in stock, set it to being in stock and return true.
-    //        If the object is already in stock, return false.
-
     public boolean setLegoSetInStock(int indexToUpdate) {
         if (isValidIndex(indexToUpdate)) {
             LegoSet foundLegoSet = legoSets.get(indexToUpdate);
@@ -78,44 +71,48 @@ public class LegoSetAPI {
         return false;
     }
 
-    //TODO Add a method, numberOfLegoSets().  The return type is int.
-    //     This method returns the number of lego set objects currently stored in the array list.
-
     public int numberOfLegoSets() {
-        return -1;
+        return legoSets.size();
     }
-    //TODO Add a method, numberOfLegoSetsInStock().  The return type is int.
-    //     This method returns the number of lego set objects in the array list that are in currently in stock.
 
     public int numberOfLegoSetsInStock() {
-        return -1;
+        int numInStock = 0;
+        for(int i = 0; i < legoSets.size(); i++) {
+            if (legoSets.get(i).isInStock()) {
+                numInStock += 1;
+            }
+        }
+        return numInStock;
     }
-
-    //TODO Add a method, numberOfLegoSetsOutOfStock().  The return type is int.
-    //     This method returns the number of lego set objects in the array list that are out of stock.
 
     public int numberOfLegoSetsOutOfStock() {
-        return -1;
-    }
-    //-------------------------------------
-    //  Counting Methods - Advanced
-    //-------------------------------------
-
-    //TODO Add a method, numberOfLegoSetsByTheme(String).  The return type is int.
-    //     This method returns the number of lego set objects in the array list that match the
-    //     theme (i.e. the parameter value).
-
-    public int numberOfLegoSetsByTheme(String fummy) {
-        return -1;
+        int numOutOfStock = 0;
+        for(int i = 0; i < legoSets.size(); i++) {
+            if (!legoSets.get(i).isInStock()) {
+                numOutOfStock += 1;
+            }
+        }
+        return numOutOfStock;
     }
 
+    public int numberOfLegoSetsByTheme(String themeName) {
+        int numOfSetsThatMatchTheme = 0;
+        for (int i = 0; i < legoSets.size(); i++) {
+            if (legoSets.get(i).getTheme().equals(themeName)) {
+                numOfSetsThatMatchTheme += 1;
+            }
+        }
+        return numOfSetsThatMatchTheme;
+    }
 
-    //TODO Add a method, numberOfLegoSetsForAgeRatingAndAbove(int).  The return type is int.
-    //     This method returns the number of lego set objects in the array list that are equal to
-    //     or above the age passed as a parameter value.
-
-    public int numberOfLegoSetsForAgeRatingAndAbove(int dummy) {
-        return -1;
+    public int numberOfLegoSetsForAgeRatingAndAbove(int minAge) {
+        int numOfSetsForRatingPlus = 0;
+        for (LegoSet legoSet : legoSets) {
+            if (legoSet.getMinimumAge() >= minAge) {
+                numOfSetsForRatingPlus++;
+            }
+        }
+        return numOfSetsForRatingPlus;
     }
 
     //TODO Add a method, totalNumberOfInstructionBooklets().  The return type is int.
@@ -123,34 +120,35 @@ public class LegoSetAPI {
     //     currently stored in the array list.
 
     public int totalNumberOfInstructionBooklets() {
-        return -2;
+        return -1;
     }
-
-    //------------------------------------
-    // LISTING METHODS - Basic
-    //------------------------------------
-
-    //TODO Add a method, listAllLegoSets().  The return type is String.
-    //     This method returns a list of the lego sets stored in the array list.
-    //     Each lego set should be on a new line and should be preceded by the index number e.g.
-    //        0: Lego Set 1 Details
-    //        1: Lego Set 2 Details
-    //    If there are no lego sets stored in the array list, return a string that contains "No Lego sets".
 
     public String listAllLegoSets() {
-        return "";
+        String listOfALlLegoSets = "";
+        if (!legoSets.isEmpty()) {
+            for (int i = 0; i < legoSets.size(); i++) {
+                listOfALlLegoSets += "[" + i + "]: " + legoSets.get(i) + "\n" + "\n";
+            }
+            return listOfALlLegoSets;
+        }
+        else {
+            return "Sorry, No Lego Sets in the list";
+        }
     }
 
-    //TODO Add a method, listLegoSetsInStock().  The return type is String.
-    //     This method returns a list of the IN STOCK lego sets stored in the array list.
-    //     Each matching lego set should be on a new line and should be preceded by the index number e.g.
-    //        0: Lego Set 1 Details
-    //        3: Lego Set 4 Details
-    //    If there are no IN STOCK lego sets stored in the array list, the return string should
-    //    have "No Lego sets in stock".
-
     public String listLegoSetsInStock() {
-        return "String";
+        String listOfSetsInStock = "";
+        for(int i = 0; i < legoSets.size(); i++) {
+            if (legoSets.get(i).isInStock()) {
+                listOfSetsInStock += "[" + i + "]: " + legoSets.get(i) + "\n" + "\n";
+            }
+        }
+        if (listOfSetsInStock.equals("")) {
+            return "No Lego Sets in stock";
+        }
+        else {
+            return listOfSetsInStock;
+        }
     }
 
     //TODO Add a method, listLegoSetsOutOfStock().  The return type is String.
@@ -162,11 +160,20 @@ public class LegoSetAPI {
     //        have "No Lego sets are out of stock".
 
     public String listLegoSetsOutOfStock() {
-        return "helloworld";
+        String listOfSetsOutOfStock = "";
+        for(int i = 0; i < legoSets.size(); i++) {
+            if (!legoSets.get(i).isInStock()) {
+                listOfSetsOutOfStock += "[" + i + "]: " + legoSets.get(i) + "\n" + "\n";
+            }
+        }
+        if (!listOfSetsOutOfStock.equals("")) { // If there are LegoSets in the out of stock string, then return it.
+            return listOfSetsOutOfStock;
+        }
+        else {
+            return "No lego sets out of stock"; // If there is an empty list of out
+            // of stock items, then return no sets out of stock
+        }
     }
-    //------------------------------------
-    // LISTING METHODS - Advanced
-    //------------------------------------
 
     //TODO Add a method, listLegoSetsBySpecificTheme(String).  The return type is String.
     //    This method returns a list of the lego sets of a specific theme stored in the array list (i.e.
