@@ -10,7 +10,7 @@ import java.security.PublicKey;
 import java.util.ArrayList;
 
 public class LegoSetAPI {
-    private ArrayList<LegoSet> legoSets;
+    private final ArrayList<LegoSet> legoSets;
 
     public LegoSetAPI() {
         legoSets = new ArrayList<LegoSet>();
@@ -96,13 +96,18 @@ public class LegoSetAPI {
     }
 
     public int numberOfLegoSetsByTheme(String themeName) {
-        int numOfSetsThatMatchTheme = 0;
-        for (int i = 0; i < legoSets.size(); i++) {
-            if (legoSets.get(i).getTheme().equals(themeName)) {
-                numOfSetsThatMatchTheme += 1;
-            }
+        if (legoSets.isEmpty()) {
+            return 0;
         }
-        return numOfSetsThatMatchTheme;
+        else {
+            int numOfSetsThatMatchTheme = 0;
+            for (int i = 0; i < legoSets.size(); i++) {
+                if (legoSets.get(i).getTheme().equals(themeName)) {
+                    numOfSetsThatMatchTheme += 1;
+                }
+            }
+            return numOfSetsThatMatchTheme;
+        }
     }
 
     public int numberOfLegoSetsForAgeRatingAndAbove(int minAge) {
@@ -115,19 +120,19 @@ public class LegoSetAPI {
         return numOfSetsForRatingPlus;
     }
 
-    //TODO Add a method, totalNumberOfInstructionBooklets().  The return type is int.
-    //     This method returns the total number of instruction booklets across all the lego set objects
-    //     currently stored in the array list.
-
     public int totalNumberOfInstructionBooklets() {
-        return -1;
+        int total = 0;
+        for(LegoSet legoset : legoSets) {
+            total += legoset.numberOfInstructionBooklets();
+        }
+        return total;
     }
 
     public String listAllLegoSets() {
         String listOfALlLegoSets = "";
         if (!legoSets.isEmpty()) {
             for (int i = 0; i < legoSets.size(); i++) {
-                listOfALlLegoSets += "[" + i + "]: " + legoSets.get(i) + "\n" + "\n";
+                listOfALlLegoSets += "[" + i + "]: " + legoSets.get(i) + "\n";
             }
             return listOfALlLegoSets;
         }
@@ -140,7 +145,7 @@ public class LegoSetAPI {
         String listOfSetsInStock = "";
         for(int i = 0; i < legoSets.size(); i++) {
             if (legoSets.get(i).isInStock()) {
-                listOfSetsInStock += "[" + i + "]: " + legoSets.get(i) + "\n" + "\n";
+                listOfSetsInStock += "[" + i + "]: " + legoSets.get(i) + "\n";
             }
         }
         if (listOfSetsInStock.equals("")) {
@@ -151,19 +156,11 @@ public class LegoSetAPI {
         }
     }
 
-    //TODO Add a method, listLegoSetsOutOfStock().  The return type is String.
-    //     This method returns a list of the OUT OF STOCK lego sets stored in the array list.
-    //     Each matching lego set should be on a new line and should be preceded by the index number e.g.
-    //        1: Lego Set 2 Details
-    //        4: Lego Set 5 Details
-    //    If there are no OUT OF STOCK lego sets stored in the array list, the return string should
-    //        have "No Lego sets are out of stock".
-
     public String listLegoSetsOutOfStock() {
         String listOfSetsOutOfStock = "";
         for(int i = 0; i < legoSets.size(); i++) {
             if (!legoSets.get(i).isInStock()) {
-                listOfSetsOutOfStock += "[" + i + "]: " + legoSets.get(i) + "\n" + "\n";
+                listOfSetsOutOfStock += "[" + i + "]: " + legoSets.get(i) + "\n";
             }
         }
         if (!listOfSetsOutOfStock.equals("")) { // If there are LegoSets in the out of stock string, then return it.
@@ -175,29 +172,45 @@ public class LegoSetAPI {
         }
     }
 
-    //TODO Add a method, listLegoSetsBySpecificTheme(String).  The return type is String.
-    //    This method returns a list of the lego sets of a specific theme stored in the array list (i.e.
-    //     that match the parameter value).
-    //     Each matching lego set should be on a new line and should be preceded by the index number e.g.
-    //        1: Lego Set 2 Details
-    //        4: Lego Set 5 Details
-    //    If there are no lego sets stored in the array list, return a string that contains "No Lego sets".
-    //    If there are no lego sets matching the theme, the return string should have "No Lego sets with theme".
-
-
-    public String listLegoSetsBySpecificTheme(String dummy) {
-        return "";
+    public String listLegoSetsBySpecificTheme(String theme) {
+        if (legoSets.isEmpty()) {
+            return "no lego sets stored";
+        }
+        else {
+            String listOfSetsMatchingTheme = "";
+            for(int i = 0; i < legoSets.size(); i++) {
+                if(legoSets.get(i).getTheme().equals(theme)) {
+                    listOfSetsMatchingTheme += "[" + i + "]: " + legoSets.get(i).toString() + "\n";
+                }
+            }
+            if (listOfSetsMatchingTheme.equals("")) {
+                return "no lego sets with theme";
+            }
+            else {
+                return listOfSetsMatchingTheme;
+            }
+        }
     }
-    //TODO Add a method, listLegoSetsForAgeRatingAndAbove(int).  The return type is String.
-    //    This method returns a list of the lego sets that are equal or above the age supplied as a parameter.
-    //     Each matching lego set should be on a new line and should be preceded by the index number e.g.
-    //        1: Lego Set 2 Details
-    //        4: Lego Set 5 Details
-    //    If there are no lego sets stored in the array list, return a string that contains "No Lego sets".
-    //    If there are no lego sets equal or above the age, the return string should have "No Lego sets available".
 
-    public String listLegoSetsForAgeRatingAndAbove(int dummy) {
-        return "";
+    public String listLegoSetsForAgeRatingAndAbove(int minAge) {
+        if (legoSets.isEmpty()) {
+            return "No Lego sets";
+        }
+        else {
+            String listOfSetsEqualOrAbove = "";
+            for(int i = 0; i < legoSets.size(); i++) {
+                if (legoSets.get(i).getMinimumAge() >= minAge) {
+                    listOfSetsEqualOrAbove += "[" + i + "]: " + legoSets.get(i).toString() + "\n";
+                }
+
+            }
+            if (listOfSetsEqualOrAbove.equals("")) {
+                return "no lego sets available for age";
+            }
+            else {
+                return listOfSetsEqualOrAbove;
+            }
+        }
     }
     //TODO Add a method, listAllInstructionBooklets().  The return type is String.
     //    This method returns a list of all the instruction booklets across all the lego set objects
@@ -209,7 +222,23 @@ public class LegoSetAPI {
     //    If there are no lego sets stored in the array list, return a string that contains "No Lego sets".
 
     public String listAllInstructionBooklets() {
-        return "";
+        if (legoSets.isEmpty()) {
+            return "no lego sets stored";
+        }
+        else  {
+            String listOfBooklets = "";
+            for(LegoSet legoSet : legoSets) {
+                listOfBooklets += legoSet.listInstructionBooklets() + "(" + legoSet.getName() + ", " + legoSet.getCode();
+            }
+
+            if (listOfBooklets.equals("")) {
+                return "no instruction booklets";
+            }
+            else {
+                return listOfBooklets;
+            }
+        }
+
     }
 
     //TODO Add a method, listStockStatusBySpecificTheme(String).  The return type is String.
@@ -222,8 +251,40 @@ public class LegoSetAPI {
     //    If there are no lego sets stored in the array list, return a string that contains "No Lego sets".
     //    If there are no lego sets matching the theme, the return string should have "No Lego sets with theme".
 
-    public String listStockStatusBySpecificTheme(String dummy) {
-        return "";
+    public String listStockStatusBySpecificTheme(String theme) {
+        if (legoSets.isEmpty()) {
+            return "no lego sets stored";
+        }
+        else {
+            double inStock = 0;
+            double outStock = 0;
+            String listInStock = "Number of lego sets in stock: " + inStock;
+            String listOutOfStock = "Number of lego sets out of stock: " + outStock;
+            for(LegoSet legoSet : legoSets) {
+                if (legoSet.getTheme().equals(theme)) {
+                    if (legoSet.isInStock()) {
+                        inStock++;
+                        listInStock += "\n" + legoSet + "\n";
+                    }
+                }
+            }
+
+            for(LegoSet legoSet : legoSets) {
+                if (legoSet.getTheme().equals(theme)) {
+                    if (!legoSet.isInStock()) {
+                        outStock++;
+                        listOutOfStock += "\n" + legoSet + "\n";
+                    }
+                }
+            }
+            if (listInStock.equals("Number of lego sets in stock: " + 0) && listOutOfStock.equals("Number of lego sets out of stock: " + 0)){
+                return "no lego sets with theme";
+            }
+            else {
+                String stockStatus = listInStock + listOutOfStock;
+                return stockStatus;
+            }
+        }
     }
 
     public LegoSet findLegoSet(int indexOfSet) {
@@ -239,8 +300,19 @@ public class LegoSetAPI {
     // NOTE: the first lego set encountered is returned, even if more exist with that code.  For extra credit,
     //       you could add in validation to ensure that the code is unique when adding a LegoSet.
 
-    public LegoSet findLegoSetByCode(int hello) {
-        return null;
+    public LegoSet findLegoSetByCode(int code) {
+        LegoSet foundLegoSet = null;
+        for (int i = 0; i < legoSets.size(); i++) {
+            if (legoSets.get(i).getCode() == code) {
+                foundLegoSet = legoSets.get(i);
+            }
+        }
+        if (foundLegoSet == null) {
+            return null;
+        }
+        else {
+            return foundLegoSet;
+        }
     }
 
     //TODO Add a method, searchLegoSetsByName(String).  The return type is String.
@@ -266,8 +338,20 @@ public class LegoSetAPI {
     //    If there are no lego sets whose name contains the supplied string, the return string should
     //    have "No instruction booklets found".
 
-    public String searchInstructionBookletsByFileName(String dummy) {
-        return "";
+    public String searchInstructionBookletsByFileName(String fileName) {
+        if (legoSets.isEmpty()) {
+            return "no lego sets stored";
+        }
+        else {
+            String listOfBookletsThatContainFileName = "";
+            for(int i = 0; i < totalNumberOfInstructionBooklets(); i++) {
+                if (legoSets.get(i).listInstructionBooklets().toLowerCase().contains(fileName)) {
+                    listOfBookletsThatContainFileName += legoSets.get(i).getInstructionBooklets().contains(fileName);
+                }
+            }
+            return listOfBookletsThatContainFileName;
+        }
+
     }
 
     //-------------------------

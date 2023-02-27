@@ -148,16 +148,16 @@ public class LegoSet {
     @Override
     public String toString() {
         String toString; // string declaration, then assigning a value to it.
-        toString = "---- LegoSet ----" + "\n" +
-                " | Name = " + name + "\n" +
-                " | Code = " + code + "\n" +
-                " | Cost = " + "€" + cost + "\n" +
-                " | " + pieceCount + " pieces" + "\n" +
-                " | Theme = " + theme + "\n" +
-                " | Minimum Age for use = " + minimumAge + "+" + "\n";
+        toString = "LegoSet:" +
+                " | Name = " + name +
+                " | Code = " + code +
+                " | Cost = " + "€" + cost +
+                " | " + pieceCount + " pieces" +
+                " | Theme = " + theme +
+                " | Minimum Age for use = " + minimumAge + "+";
 
         if (this.inStock) {
-            toString += " | Availability = " + inStock + "(in stock)" + "\n";
+            toString += " | Availability = " + inStock + "(in stock)";
         } else {
             toString += " | Availability = " + inStock + "(not available)" + "\n";
         }

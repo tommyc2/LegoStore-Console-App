@@ -52,7 +52,7 @@ public class InstructionBooklet {
     public String toString() {
         String str = "";
 
-        str += "--- Instruction Booklet ---" + "\n";
+        str += "Instruction Booklet --> ";
         str += "Filename: ";
 
         if (this.fileName.endsWith(".pdf")) {
@@ -62,7 +62,7 @@ public class InstructionBooklet {
             str += this.fileName + ".pdf";
         }
 
-        str += "\n" + "Number of Pages: ";
+        str += ", Number of Pages: ";
 
         if (this.numberOfPages != 1) {
             str += "(" + numberOfPages + " pages" + ")";
