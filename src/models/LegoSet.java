@@ -3,8 +3,9 @@ package models;
 import utils.MinimumAgeUtility;
 import utils.ThemeUtility;
 import utils.Utilities;
+
 import java.util.ArrayList;
-import java.util.Objects;
+
 import static java.lang.Double.MAX_VALUE;
 
 
@@ -179,7 +180,7 @@ public class LegoSet {
         if (!instructionBooklets.isEmpty()) {
             String listOfBooklets = "";
             for (int i = 0; i < instructionBooklets.size(); i++) {
-                listOfBooklets += i + ": " + instructionBooklets.get(i) + "\n";
+                listOfBooklets += (i) + ": " + instructionBooklets.get(i) + "\n";
             }
             return listOfBooklets;
         } else {

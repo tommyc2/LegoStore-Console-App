@@ -1,7 +1,8 @@
+import controllers.LegoSetAPI;
 
 public class Driver {
 
-    //TODO Define an object of the LegoSetAPI here.  It should be declared private.
+    private LegoSetAPI legoSetAPI = new LegoSetAPI();
 
     public static void main(String[] args) {
         new Driver();

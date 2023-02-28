@@ -1,16 +1,20 @@
 package controllers;
 
+import com.thoughtworks.xstream.XStream;
+import com.thoughtworks.xstream.io.xml.DomDriver;
+import models.LegoSet;
+
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.util.ArrayList;
+
 //TODO When you have the code written in this class, write a JavaDoc comment for class and also
 //     for any public methods in this class.
 
-import models.InstructionBooklet;
-import models.LegoSet;
-
-import java.security.PublicKey;
-import java.util.ArrayList;
-
 public class LegoSetAPI {
-    private final ArrayList<LegoSet> legoSets;
+    private ArrayList<LegoSet> legoSets;
 
     public LegoSetAPI() {
         legoSets = new ArrayList<LegoSet>();
@@ -37,7 +41,7 @@ public class LegoSetAPI {
     }
     public LegoSet deleteLegoSet(int indexToDelete) {
         if (isValidIndex(indexToDelete)) {
-            legoSets.remove(indexToDelete);
+            return legoSets.remove(indexToDelete);
         }
         return null;
     }
@@ -101,12 +105,17 @@ public class LegoSetAPI {
         }
         else {
             int numOfSetsThatMatchTheme = 0;
-            for (int i = 0; i < legoSets.size(); i++) {
-                if (legoSets.get(i).getTheme().equals(themeName)) {
+            for(int i = 0; i < legoSets.size(); i++) {
+                if (legoSets.get(i).getTheme().equalsIgnoreCase(themeName)) {
                     numOfSetsThatMatchTheme += 1;
                 }
             }
-            return numOfSetsThatMatchTheme;
+            if (numOfSetsThatMatchTheme == 0){
+                return 0;
+            }
+            else{
+                return numOfSetsThatMatchTheme;
+            }
         }
     }
 
@@ -179,7 +188,7 @@ public class LegoSetAPI {
         else {
             String listOfSetsMatchingTheme = "";
             for(int i = 0; i < legoSets.size(); i++) {
-                if(legoSets.get(i).getTheme().equals(theme)) {
+                if(legoSets.get(i).getTheme().toLowerCase().contains(theme)) {
                     listOfSetsMatchingTheme += "[" + i + "]: " + legoSets.get(i).toString() + "\n";
                 }
             }
@@ -212,14 +221,6 @@ public class LegoSetAPI {
             }
         }
     }
-    //TODO Add a method, listAllInstructionBooklets().  The return type is String.
-    //    This method returns a list of all the instruction booklets across all the lego set objects
-    //    stored in the array list.
-    //    Each instruction booklet should be on a new line and should contain the lego set name and code too e.g.
-    //       Booket1.pdf (Fire Station, 43544)
-    //       Booket2.pdf (Fire Station, 43544)
-    //       Instructions1.pdf (Titanic, 54655)
-    //    If there are no lego sets stored in the array list, return a string that contains "No Lego sets".
 
     public String listAllInstructionBooklets() {
         if (legoSets.isEmpty()) {
@@ -228,7 +229,8 @@ public class LegoSetAPI {
         else  {
             String listOfBooklets = "";
             for(LegoSet legoSet : legoSets) {
-                listOfBooklets += legoSet.listInstructionBooklets() + "(" + legoSet.getName() + ", " + legoSet.getCode();
+                listOfBooklets += "LegoSet Name: " + legoSet.getName() + ", " + legoSet.getCode() + "\n" +
+                legoSet.listInstructionBooklets() + "\n";
             }
 
             if (listOfBooklets.equals("")) {
@@ -256,34 +258,29 @@ public class LegoSetAPI {
             return "no lego sets stored";
         }
         else {
-            double inStock = 0;
-            double outStock = 0;
-            String listInStock = "Number of lego sets in stock: " + inStock;
-            String listOutOfStock = "Number of lego sets out of stock: " + outStock;
+            int totalInStock = 0;
+            int totalOutStock = 0;
+            String listInStock = "";
+            String listOutStock = "";
             for(LegoSet legoSet : legoSets) {
                 if (legoSet.getTheme().equals(theme)) {
-                    if (legoSet.isInStock()) {
-                        inStock++;
-                        listInStock += "\n" + legoSet + "\n";
+                    if (legoSet.isInStock()){
+                        listInStock += legoSet.getName() +"\n";
+                        totalInStock++;
+                    }
+                    else {
+                            listOutStock += legoSet.getName() +"\n";
+                            totalOutStock++;
                     }
                 }
-            }
-
-            for(LegoSet legoSet : legoSets) {
-                if (legoSet.getTheme().equals(theme)) {
-                    if (!legoSet.isInStock()) {
-                        outStock++;
-                        listOutOfStock += "\n" + legoSet + "\n";
-                    }
+                else {
+                    return "no lego sets with theme";
                 }
             }
-            if (listInStock.equals("Number of lego sets in stock: " + 0) && listOutOfStock.equals("Number of lego sets out of stock: " + 0)){
-                return "no lego sets with theme";
-            }
-            else {
-                String stockStatus = listInStock + listOutOfStock;
-                return stockStatus;
-            }
+            String InStockList = "Number of lego sets in stock: " + totalInStock + "\n" + listInStock;
+            String OutStockList = "Number of lego sets out of stock: " + totalOutStock + "\n" + listOutStock;
+            String fullList = InStockList + OutStockList;
+            return fullList;
         }
     }
 
@@ -293,13 +290,6 @@ public class LegoSetAPI {
         }
         return null;
     }
-    //TODO Add a method, findLegoSetByCode(int).  The return type is LegoSet.
-    //    This method searches the array list for a lego set with a specific code (passed as a parameter).
-    //    When a lego set is found for this code, it is returned back.
-    //    If no lego set exists for that code, return null.
-    // NOTE: the first lego set encountered is returned, even if more exist with that code.  For extra credit,
-    //       you could add in validation to ensure that the code is unique when adding a LegoSet.
-
     public LegoSet findLegoSetByCode(int code) {
         LegoSet foundLegoSet = null;
         for (int i = 0; i < legoSets.size(); i++) {
@@ -314,19 +304,26 @@ public class LegoSetAPI {
             return foundLegoSet;
         }
     }
+    public String searchLegoSetsByName(String name) {
+        if (legoSets.isEmpty()) {
+            return "no lego sets stored";
+        }
+        else {
+            String foundLegoSet = "";
+            for(int i = 0; i < legoSets.size(); i++){
+                if(legoSets.get(i).getName().toLowerCase().contains(name)){
+                    foundLegoSet += "[" + i + "]: " + legoSets.get(i).toString();
+                }
 
-    //TODO Add a method, searchLegoSetsByName(String).  The return type is String.
-    //    This method returns a list of the lego sets whose name contains the string passed as a parameter.
-    //    Each matching lego set should be on a new line and should be preceded by the index number e.g.
-    //        1: Lego Set 2 Details
-    //        4: Lego Set 5 Details
-    //    If there are no lego sets stored in the array list, return a string that contains "No Lego sets".
-    //    If there are no lego sets whose name contains the supplied string, the return string should
-    //    have "No Lego sets found".
+            }
+            if (foundLegoSet.equals("")){
+                return "no lego sets found";
+            }
+            else {
+                return foundLegoSet;
+            }
 
-
-    public String searchLegoSetsByName(String thing) {
-        return "";
+        }
     }
     //TODO Add a method, searchInstructionBookletsByFileName(String).  The return type is String.
     //    This method returns a list of instruction booklets whose file name contains the string passed
@@ -343,43 +340,39 @@ public class LegoSetAPI {
             return "no lego sets stored";
         }
         else {
-            String listOfBookletsThatContainFileName = "";
+            String bookletThatContainsFileName = "";
             for(int i = 0; i < totalNumberOfInstructionBooklets(); i++) {
                 if (legoSets.get(i).listInstructionBooklets().toLowerCase().contains(fileName)) {
-                    listOfBookletsThatContainFileName += legoSets.get(i).getInstructionBooklets().contains(fileName);
+                    bookletThatContainsFileName += legoSets.get(i).getInstructionBooklets().contains(fileName);
+
                 }
             }
-            return listOfBookletsThatContainFileName;
+            return bookletThatContainsFileName;
         }
 
     }
-
-    //-------------------------
-    // HELPER METHODS
-    //-------------------------
 
     public boolean isValidIndex(int index) {
         return (index >= 0) && (index < legoSets.size());
     }
 
-    //-------------------------
-    // PERSISTENCE METHODS
-    //-------------------------
+    public void load() throws Exception {
 
-    //TODO Add a method, load().  The return type is void.
-    //    This method uses the XStream component to deserialise the lego sets and their associated booklets from
-    //    an XML file into the legoSets array list.
+        Class<?>[] classes = new Class[] {LegoSet.class };
+        XStream xstream = new XStream(new DomDriver());
+        XStream.setupDefaultSecurity(xstream);
+        xstream.allowTypes(classes);
 
-    public void load() {
-
+        ObjectInputStream is = xstream.createObjectInputStream(new FileReader("legoSets.xml"));
+        legoSets = (ArrayList<LegoSet>) is.readObject();
+        is.close();
     }
 
-    //TODO Add a method, save().  The return type is void.
-    //    This method uses the XStream component to serialise the lego sets and their associated booklets to
-    //    an XML file.
-
-    public void save() {
-
+    public void save() throws Exception {
+        XStream xstream = new XStream(new DomDriver());
+        ObjectOutputStream out = xstream.createObjectOutputStream(new FileWriter("legoSets.xml"));
+        out.writeObject(legoSets);
+        out.close();
     }
 }
 
