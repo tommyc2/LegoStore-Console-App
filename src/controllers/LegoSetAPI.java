@@ -188,7 +188,7 @@ public class LegoSetAPI {
         else {
             String listOfSetsMatchingTheme = "";
             for(int i = 0; i < legoSets.size(); i++) {
-                if(legoSets.get(i).getTheme().toLowerCase().contains(theme)) {
+                if(legoSets.get(i).getTheme().toLowerCase().contains(theme.toLowerCase())) {
                     listOfSetsMatchingTheme += "[" + i + "]: " + legoSets.get(i).toString() + "\n";
                 }
             }
