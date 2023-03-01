@@ -81,8 +81,8 @@ public class LegoSetAPI {
 
     public int numberOfLegoSetsInStock() {
         int numInStock = 0;
-        for(int i = 0; i < legoSets.size(); i++) {
-            if (legoSets.get(i).isInStock()) {
+        for(LegoSet legoSet : legoSets) {
+            if (legoSet.isInStock()) {
                 numInStock += 1;
             }
         }
@@ -105,8 +105,8 @@ public class LegoSetAPI {
         }
         else {
             int numOfSetsThatMatchTheme = 0;
-            for(int i = 0; i < legoSets.size(); i++) {
-                if (legoSets.get(i).getTheme().equalsIgnoreCase(themeName)) {
+            for(LegoSet legoSet : legoSets) {
+                if (legoSet.getTheme().equalsIgnoreCase(themeName)) {
                     numOfSetsThatMatchTheme += 1;
                 }
             }
@@ -254,6 +254,7 @@ public class LegoSetAPI {
     //    If there are no lego sets matching the theme, the return string should have "No Lego sets with theme".
 
     public String listStockStatusBySpecificTheme(String theme) {
+
         if (legoSets.isEmpty()) {
             return "no lego sets stored";
         }
@@ -263,7 +264,8 @@ public class LegoSetAPI {
             String listInStock = "";
             String listOutStock = "";
             for(LegoSet legoSet : legoSets) {
-                if (legoSet.getTheme().equals(theme)) {
+                if (legoSet.getTheme().equalsIgnoreCase(theme)) {
+                // error here
                     if (legoSet.isInStock()){
                         listInStock += legoSet.getName() +"\n";
                         totalInStock++;
@@ -273,14 +275,16 @@ public class LegoSetAPI {
                             totalOutStock++;
                     }
                 }
-                else {
-                    return "no lego sets with theme";
-                }
             }
-            String InStockList = "Number of lego sets in stock: " + totalInStock + "\n" + listInStock;
-            String OutStockList = "Number of lego sets out of stock: " + totalOutStock + "\n" + listOutStock;
-            String fullList = InStockList + OutStockList;
-            return fullList;
+            if ((totalInStock != 0) || (totalOutStock != 0)) {
+                String InStockList = "Number of lego sets in stock: " + totalInStock + "\n" + listInStock;
+                String OutStockList = "Number of lego sets out of stock: " + totalOutStock + "\n" + listOutStock;
+                String fullList = InStockList + OutStockList;
+                return fullList;
+            }
+            else {
+                return "no lego sets with theme";
+            }
         }
     }
 
@@ -341,9 +345,9 @@ public class LegoSetAPI {
         }
         else {
             String bookletThatContainsFileName = "";
-            for(int i = 0; i < totalNumberOfInstructionBooklets(); i++) {
-                if (legoSets.get(i).listInstructionBooklets().toLowerCase().contains(fileName)) {
-                    bookletThatContainsFileName += legoSets.get(i).getInstructionBooklets().contains(fileName);
+            for(LegoSet legoSet : legoSets) {
+                if (legoSet.listInstructionBooklets().toLowerCase().contains(fileName)) {
+                    bookletThatContainsFileName += legoSet.getInstructionBooklets().contains(fileName);
 
                 }
             }

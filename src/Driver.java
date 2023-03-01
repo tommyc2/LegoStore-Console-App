@@ -32,7 +32,6 @@ public class Driver {
         while (option != 0) {
 
             switch (option) {
-
                 default -> System.out.println("Invalid option entered: " + option);
             }
 
@@ -46,23 +45,29 @@ public class Driver {
 
     private int displayMenu(){
             int option = ScannerInput.readNextInt("""
-             ------------------------------------------------------------------
-                |                            LEGO SET App                           |
+             ---------------------------------------------------------------------
+                |                            LEGO SET App                        |
                 ------------------------------------------------------------------
-                | Lego Set Menu:                                        
+                | Lego Set MENU:                                                 |
                 |   1) Add a lego set                                            |
-                |   2) List the Products                                         |
-                |   3) Update a product                                          | 
-                |   4) Delete a product                                          | 
+                |   2) List all lego sets                                        |
+                |   3) Update a lego set                                         | 
+                |   4) Delete a lego set                                         | 
+                |   5) Set stock status of Lego set                              |
+                |   6) Find a specific lego set (by code)                        |
+                |   7) Find a specific lego set (by name)                        |
                 ------------------------------------------------------------------
-                |   5) List the current products                                 
-                |   6) Display average product unit cost                         |
-                |   7) Display cheapest product                                  |
-                |   8) List products that are more expensive than a given price  |
+                |   Instruction Booklet MENU:                                   |
+                |   8) Add a booklet to a lego set                               |
+                |   9) List all booklets                                         |
+                |   10) Update a booklet on a lego set                           |
+                |   11) Delete a booklet on a lego set                           |
+                |   12) Search for all booklets (by file name)                   |
                 ------------------------------------------------------------------
-                |   9)  Save products to products.xml                            |  
-                |   10) Load products from products.xml                          |  
-                |   0)  Exit                                                     |  
+                |   REPORT MENU:                                                 |  
+                |   13) Print Overall stock report                               |  
+                |   14) Print all lego sets by chosen theme                      |
+                |   15) Print all lego sets at or above a minimum age            |                               |  
                 ------------------------------------------------------------------
                 ==>>  """);
 
@@ -74,24 +79,97 @@ public class Driver {
     // Private methods for CRUD on LegoSet
     //------------------------------------
 
+    private void addLegoSet(){
+        String name = ScannerInput.readNextLine("Enter the lego set name: ");
+        int code = ScannerInput.readNextInt("Enter the lego set code: ");
+        double cost = ScannerInput.readNextDouble("Enter the lego set cost: ");
+        int pieceCount = ScannerInput.readNextInt("Enter the lego set piece count: ");
+        String theme = ScannerInput.readNextLine("Enter the lego set theme: ");
+        int minimumAge = ScannerInput.readNextInt("Enter minimum age for set: ");
+
+
+    }
+
+    private void printAllLegoSets(){
+
+    }
+
+    private void printInStockLegoSets(){
+
+    }
+
+    private void printOutOfStockLegoSets(){
+
+    }
+
+    private void updateLegoSet(){
+
+    }
+
+    private void deleteLegoSet(){
+
+    }
+
+    private void setStockStatusForLegoSets(){
+
+    }
+
+    private void printLegoSetsBySelectedTheme(){
+
+    }
+
+    private void printLegoSetsByMinAge(){
+
+    }
 
     //--------------------------------------------------
     //  Private methods for CRUD on Instruction Booklets
     //--------------------------------------------------
 
+    private void addBookletToLegoSet(){
+
+    }
+
+    private void printAllInstructionBooklets(){
+
+    }
+
+    private void updateBookletInLegoSet(){
+
+    }
+
+    private void deleteBookletFromLegoSet(){
+
+    }
 
     //-----------------------------------------------------------------
     //  Private methods for Search facility (for LegoSets and Booklets)
     //-----------------------------------------------------------------
+    private void searchBookletsByFileName(){
 
+    }
+    private void findLegoSetByCode(){
+
+    }
+    private void searchLegoSetsByName(){
+
+    }
 
     //-----------------------------
     //  Private methods for Reports
     // ----------------------------
 
+    private void printStockReport(){
+
+    }
 
     //---------------------------------
     //  Private methods for Persistence
     // --------------------------------
+
+    private void save(){
+
+    }
+
 
 }
