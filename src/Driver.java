@@ -251,11 +251,21 @@ public class Driver {
     // --------------------------------
 
     private void save() {
-
+        try{
+            legoSetAPI.save();
+        }
+        catch (Exception e) {
+            System.err.println("Error occurred: " + e);
+        }
     }
 
     private void load(){
-
+        try{
+            legoSetAPI.load();
+        }
+        catch (Exception e) {
+            System.err.println("Error occurred: " + e);
+        }
     }
 
 
