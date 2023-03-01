@@ -129,7 +129,7 @@ public class Driver {
             boolean updatedLegoSet = legoSetAPI.updateLegoSet(indexToUpdate,name,code,cost,pieceCount,theme,minimumAge);
 
             if (updatedLegoSet){
-                System.out.print("Updated lego set successfully!");
+                System.out.println("Updated lego set successfully!");
             }
             else{
                 System.out.println("Lego set was not successful");
@@ -172,7 +172,8 @@ public class Driver {
     }
 
     private void printLegoSetsByMinAge(){
-
+    int selectedMinAge = ScannerInput.readNextInt("Enter minimum age: ");
+    System.out.println(legoSetAPI.listLegoSetsForAgeRatingAndAbove(selectedMinAge));
     }
 
     //--------------------------------------------------
