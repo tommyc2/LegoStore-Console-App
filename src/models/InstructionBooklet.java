@@ -2,8 +2,6 @@ package models;
 
 import utils.Utilities;
 
-import java.util.Objects;
-
 public class InstructionBooklet {
 
     private int numberOfPages = 1;
@@ -19,6 +17,7 @@ public class InstructionBooklet {
         }
 
     }
+
     public int getNumberOfPages() {
         return numberOfPages;
     }
