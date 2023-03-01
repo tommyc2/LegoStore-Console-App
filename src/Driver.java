@@ -1,4 +1,5 @@
 import controllers.LegoSetAPI;
+import models.LegoSet;
 import utils.ScannerInput;
 
 public class Driver {
@@ -87,11 +88,19 @@ public class Driver {
         String theme = ScannerInput.readNextLine("Enter the lego set theme: ");
         int minimumAge = ScannerInput.readNextInt("Enter minimum age for set: ");
 
+        boolean isAdded = legoSetAPI.addLegoSet(new LegoSet(name,code,cost,pieceCount,theme,minimumAge));
 
+        if (isAdded){
+            System.out.println("Lego Set added successfully");
+        }
+        else{
+            System.out.println("Your attempt was unsuccessful");
+        }
     }
 
     private void printAllLegoSets(){
-
+        System.out.println("List of lego sets:");
+        System.out.println(legoSetAPI.listAllLegoSets());
     }
 
     private void printInStockLegoSets(){
@@ -103,11 +112,54 @@ public class Driver {
     }
 
     private void updateLegoSet(){
+    printAllLegoSets();
 
+    if (legoSetAPI.numberOfLegoSets() > 0){
+        int indexToUpdate = ScannerInput.readNextInt("Enter the index of the lego set: ");
+
+        if (legoSetAPI.isValidIndex(indexToUpdate)){
+
+            String name = ScannerInput.readNextLine("Enter the lego set name: ");
+            int code = ScannerInput.readNextInt("Enter the lego set code: ");
+            double cost = ScannerInput.readNextDouble("Enter the lego set cost: ");
+            int pieceCount = ScannerInput.readNextInt("Enter the lego set piece count: ");
+            String theme = ScannerInput.readNextLine("Enter the lego set theme: ");
+            int minimumAge = ScannerInput.readNextInt("Enter minimum age for set: ");
+
+            boolean updatedLegoSet = legoSetAPI.updateLegoSet(indexToUpdate,name,code,cost,pieceCount,theme,minimumAge);
+
+            if (updatedLegoSet){
+                System.out.print("Updated lego set successfully!");
+            }
+            else{
+                System.out.println("Lego set was not successful");
+            }
+
+        }
+        else{
+            System.out.println("Not a valid index");
+        }
+    }
     }
 
     private void deleteLegoSet(){
+    printAllLegoSets();
 
+    if (legoSetAPI.numberOfLegoSets() > 0) {
+        int indexToDelete = ScannerInput.readNextInt("Enter index of lego set to delete here, then press enter: ");
+
+       LegoSet setToDelete = legoSetAPI.deleteLegoSet(indexToDelete);
+
+       if (setToDelete == null){
+           System.out.println("This lego set was not deleted: " + setToDelete.getName());
+    }
+       else{
+           System.out.println("This lego set was deleted: " + setToDelete.getName());
+       }
+    }
+    else{
+        System.out.println("There are no lego sets stored");
+    }
     }
 
     private void setStockStatusForLegoSets(){
@@ -115,7 +167,8 @@ public class Driver {
     }
 
     private void printLegoSetsBySelectedTheme(){
-
+    String selectedTheme = ScannerInput.readNextLine("Enter the theme here, then press enter: ");
+    System.out.println(legoSetAPI.listLegoSetsBySpecificTheme(selectedTheme));
     }
 
     private void printLegoSetsByMinAge(){
