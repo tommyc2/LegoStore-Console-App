@@ -158,7 +158,7 @@ public class LegoSet {
                 " | Minimum Age for use = " + minimumAge + "+";
 
         if (this.inStock) {
-            toString += " | Availability = " + inStock + "(in stock)";
+            toString += " | Availability = " + inStock + "(in stock)" + "\n";
         } else {
             toString += " | Availability = " + inStock + "(not available)" + "\n";
         }

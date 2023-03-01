@@ -242,7 +242,6 @@ public class LegoSetAPI {
             String listOutStock = "";
             for (LegoSet legoSet : legoSets) {
                 if (legoSet.getTheme().equalsIgnoreCase(theme)) {
-                    // error here
                     if (legoSet.isInStock()) {
                         listInStock += legoSet.getName() + "\n";
                         totalInStock++;
@@ -319,8 +318,8 @@ public class LegoSetAPI {
         } else {
             String bookletThatContainsFileName = "";
             for (LegoSet legoSet : legoSets) {
-                if (legoSet.listInstructionBooklets().toLowerCase().contains(fileName)) {
-                    bookletThatContainsFileName += legoSet.getInstructionBooklets().contains(fileName);
+                if (legoSet.listInstructionBooklets().toLowerCase().contains(fileName.toLowerCase())) {
+                    bookletThatContainsFileName += legoSet.getInstructionBooklets().contains(fileName.toLowerCase());
 
                 }
             }

@@ -1,4 +1,5 @@
 import controllers.LegoSetAPI;
+import models.InstructionBooklet;
 import models.LegoSet;
 import utils.ScannerInput;
 
@@ -189,7 +190,25 @@ public class Driver {
     //--------------------------------------------------
 
     private void addBookletToLegoSet() {
+    printAllLegoSets();
+    int indexForLegoSet = ScannerInput.readNextInt("Enter the lego set to add the booklet to: ");
 
+    if (legoSetAPI.isValidIndex(indexForLegoSet)){
+
+        String fileName = ScannerInput.readNextLine("Enter the booklet filename here, then press enter: ");
+        int numOfPages = ScannerInput.readNextInt("Enter the number of pages in the booklet here, then press enter: ");
+
+        InstructionBooklet bookletToAdd = new InstructionBooklet(numOfPages,fileName);
+
+        boolean bookletAdded = legoSetAPI.findLegoSet(indexForLegoSet).addInstructionBooklet(bookletToAdd);
+
+        if (bookletAdded){
+            System.out.println("Instruction booklet successfully added!");
+        }
+        else{
+            System.out.println("Sorry, Instruction booklet was not added to lego set");
+        }
+    }
     }
 
     private void printAllInstructionBooklets() {
