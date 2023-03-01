@@ -168,7 +168,7 @@ public class LegoSet {
         int total = instructionBooklets.size();
         if (total != 0) {
             for (int i = 0; i < total; i++) {
-                toString += "[" + i + "]" + instructionBooklets + ".pdf" + "\n";
+                toString += "[" + i + "] " + instructionBooklets.get(i) +"\n";
             }
         } else {
             toString += "No instruction booklets";
