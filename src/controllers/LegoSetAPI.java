@@ -2,6 +2,7 @@ package controllers;
 
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.io.xml.DomDriver;
+import models.InstructionBooklet;
 import models.LegoSet;
 
 import java.io.FileReader;
@@ -334,7 +335,7 @@ public class LegoSetAPI {
 
     public void load() throws Exception {
 
-        Class<?>[] classes = new Class[]{LegoSet.class};
+        Class<?>[] classes = new Class[] {LegoSet.class, InstructionBooklet.class};
         XStream xstream = new XStream(new DomDriver());
         XStream.setupDefaultSecurity(xstream);
         xstream.allowTypes(classes);
