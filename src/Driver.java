@@ -80,8 +80,8 @@ public class Driver {
                  |   15) Print all lego sets at or above a minimum age            |                               
                  ------------------------------------------------------------------
                  |   SETTINGS MENU:                                               |  
-                 |   16) Save lego set                                            |  
-                 |   17) Load lego set                                            |
+                 |   16) Save                                                     |  
+                 |   17) Load                                                     |
                  |   0) Exit app                                                  |
                  ------------------------------------------------------------------
                  ==>>  """);
@@ -114,14 +114,6 @@ public class Driver {
     private void printAllLegoSets() {
         System.out.println("List of lego sets:");
         System.out.println(legoSetAPI.listAllLegoSets());
-    }
-
-    private void printInStockLegoSets() {
-
-    }
-
-    private void printOutOfStockLegoSets() {
-
     }
 
     private void updateLegoSet() {
@@ -223,6 +215,10 @@ public class Driver {
         int indexOfLegoSet = ScannerInput.readNextInt("Enter the index of the booklet's lego set: ");
         int indexOfBooklet = ScannerInput.readNextInt("Enter the index of the booklet: ");
 
+        if (legoSetAPI.findLegoSet(indexOfLegoSet) == null){
+            System.out.println("\n" + "WARNING: There are no lego sets of this index");
+        }
+
         if (legoSetAPI.findLegoSet(indexOfLegoSet).isValidIndex(indexOfBooklet)){
 
             String newFileName = ScannerInput.readNextLine("Enter the new file name of the booklet: ");
@@ -285,6 +281,16 @@ public class Driver {
 
     private void printStockReport() {
 
+    }
+
+    private void printInStockLegoSets() {
+        System.out.println("--- List of in stock lego sets ---");
+        System.out.println(legoSetAPI.listLegoSetsInStock());
+    }
+
+    private void printOutOfStockLegoSets() {
+        System.out.println("--- List of out of stock lego sets ---");
+        System.out.println(legoSetAPI.listLegoSetsOutOfStock());
     }
 
     //---------------------------------
