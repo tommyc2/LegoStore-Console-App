@@ -164,23 +164,40 @@ public class Driver {
         }
     }
 
-    private void setStockStatusForLegoSets() {
+    private void setStockStatusForLegoSets(){
+        int option = ScannerInput.readNextInt("Type '1' to set lego set in stock, Type '2' to set lego set out of stock: ");
+
+        if (option == 1){
+            setLegoSetInStock();
+        }
+        if (option == 2){
+            setLegoSetOutOfStock();
+        }
+        else{
+            System.out.println("Please type a valid number (1 or 2)");
+            setStockStatusForLegoSets();
+        }
+    }
+    private void setLegoSetInStock() {
         // Set Lego Set to IN STOCK //
         int indexToSetInStock = ScannerInput.readNextInt("Enter the index of the lego set: ");
-        legoSetAPI.setLegoSetInStock(indexToSetInStock);
+        boolean isDone = legoSetAPI.setLegoSetInStock(indexToSetInStock);
 
-        if (legoSetAPI.setLegoSetInStock(indexToSetInStock)){
+        if (isDone){
             System.out.println("Lego set is now in stock!");
         }
         else{
             System.out.println("Lego set is already in stock!");
         }
 
+    }
+
+    private void setLegoSetOutOfStock(){
         // Set Lego Set to OUT OF STOCK //
         int indexToSetOutOfStock = ScannerInput.readNextInt("Enter the index of the lego set: ");
-        legoSetAPI.setLegoSetOutOfStock(indexToSetOutOfStock);
+        boolean isDone = legoSetAPI.setLegoSetOutOfStock(indexToSetOutOfStock);
 
-        if (legoSetAPI.setLegoSetOutOfStock(indexToSetOutOfStock)){
+        if (isDone){
             System.out.println("Lego set is now out of stock!");
         }
         else{
