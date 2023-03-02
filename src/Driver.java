@@ -147,7 +147,8 @@ public class Driver {
                     System.out.println("Lego set was not successful");
                 }
 
-            } else {
+            }
+            else {
                 System.out.println("Not a valid index");
             }
         }
@@ -212,15 +213,55 @@ public class Driver {
     }
 
     private void printAllInstructionBooklets() {
-
+    System.out.println("List of all instruction booklets in all lego sets: ");
+    System.out.println(legoSetAPI.listAllInstructionBooklets());
     }
 
     private void updateBookletInLegoSet() {
+        printAllInstructionBooklets();
 
-    }
+        int indexOfLegoSet = ScannerInput.readNextInt("Enter the index of the booklet's lego set: ");
+        int indexOfBooklet = ScannerInput.readNextInt("Enter the index of the booklet: ");
+
+        if (legoSetAPI.findLegoSet(indexOfLegoSet).isValidIndex(indexOfBooklet)){
+
+            String newFileName = ScannerInput.readNextLine("Enter the new file name of the booklet: ");
+            int newNumOfPages = ScannerInput.readNextInt("Enter the new number of pages of the booklet: ");
+
+            boolean updatedBooklet = legoSetAPI.findLegoSet(indexOfLegoSet).updateInstructionBooklet(indexOfBooklet, newFileName, newNumOfPages);
+
+            if (updatedBooklet) {
+                System.out.println("Updated booklet successfully!");
+            } else {
+                System.out.println("Booklet update was not successful");
+            }
+
+        }
+
+        else {
+            System.out.println("Not a valid index of a lego set booklet");
+        }
+
+        }
+
 
     private void deleteBookletFromLegoSet() {
+       printAllInstructionBooklets();
 
+        if (legoSetAPI.totalNumberOfInstructionBooklets() > 0) {
+            int indexOfLegoSetToDelete = ScannerInput.readNextInt("Enter index of lego set booklet: ");
+            int indexOfBookletToDelete = ScannerInput.readNextInt("Enter index of booklet to delete: ");
+
+            InstructionBooklet bookletToDelete = legoSetAPI.findLegoSet(indexOfLegoSetToDelete).deleteInstructionBooklet(indexOfBookletToDelete);
+
+            if (bookletToDelete == null) {
+                System.out.println("This lego set was not deleted: " + bookletToDelete.getFileName());
+            } else {
+                System.out.println("This lego set was deleted: " + bookletToDelete.getFileName());
+            }
+        } else {
+            System.out.println("There are no lego set booklets stored");
+        }
     }
 
     //-----------------------------------------------------------------
