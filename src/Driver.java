@@ -280,16 +280,20 @@ public class Driver {
     // ----------------------------
 
     private void printStockReport() {
-
+    System.out.println("--- Overall Stock Report Year Ending 2022 ---");
+    printInStockLegoSets();
+    printOutOfStockLegoSets();
     }
 
     private void printInStockLegoSets() {
-        System.out.println("--- List of in stock lego sets ---");
+        System.out.println("\n" + "--- List of in stock lego sets ---");
+        System.out.println(legoSetAPI.numberOfLegoSetsInStock());
         System.out.println(legoSetAPI.listLegoSetsInStock());
     }
 
     private void printOutOfStockLegoSets() {
-        System.out.println("--- List of out of stock lego sets ---");
+        System.out.println("\n" +"--- List of out of stock lego sets ---");
+        System.out.println(legoSetAPI.numberOfLegoSetsOutOfStock());
         System.out.println(legoSetAPI.listLegoSetsOutOfStock());
     }
 
