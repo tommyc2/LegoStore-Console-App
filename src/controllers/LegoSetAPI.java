@@ -329,7 +329,6 @@ public class LegoSetAPI {
     }
 
     public void load() throws Exception {
-
         Class<?>[] classes = new Class[] {LegoSet.class, InstructionBooklet.class};
         XStream xstream = new XStream(new DomDriver());
         XStream.setupDefaultSecurity(xstream);
