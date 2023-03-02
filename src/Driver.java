@@ -165,7 +165,27 @@ public class Driver {
     }
 
     private void setStockStatusForLegoSets() {
-        
+        // Set Lego Set to IN STOCK //
+        int indexToSetInStock = ScannerInput.readNextInt("Enter the index of the lego set: ");
+        legoSetAPI.setLegoSetInStock(indexToSetInStock);
+
+        if (legoSetAPI.setLegoSetInStock(indexToSetInStock)){
+            System.out.println("Lego set is now in stock!");
+        }
+        else{
+            System.out.println("Lego set is already in stock!");
+        }
+
+        // Set Lego Set to OUT OF STOCK //
+        int indexToSetOutOfStock = ScannerInput.readNextInt("Enter the index of the lego set: ");
+        legoSetAPI.setLegoSetOutOfStock(indexToSetOutOfStock);
+
+        if (legoSetAPI.setLegoSetOutOfStock(indexToSetOutOfStock)){
+            System.out.println("Lego set is now out of stock!");
+        }
+        else{
+            System.out.println("Lego set is already out of stock!");
+        }
     }
 
     private void printLegoSetsBySelectedTheme() {
@@ -264,7 +284,8 @@ public class Driver {
     //  Private methods for Search facility (for LegoSets and Booklets)
     //-----------------------------------------------------------------
     private void searchBookletsByFileName() {
-
+    String fileName = ScannerInput.readNextLine("Enter the filename of the booklet to find: ");
+    System.out.println(legoSetAPI.searchInstructionBookletsByFileName(fileName));
     }
 
     private void findLegoSetByCode() {
