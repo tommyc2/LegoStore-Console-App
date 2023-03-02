@@ -27,6 +27,7 @@ public class LegoSetAPI {
 
     /**
      * This method adds a lego set object to an arraylist of lego sets
+     *
      * @param legoSet Accepts a legoset object as a parameter
      * @return returns true if legoset has been added.
      */
@@ -36,12 +37,13 @@ public class LegoSetAPI {
 
     /**
      * This method update a current lego set in the arraylist of legosets
-     * @param indexToUpdate takes in legoset object index
-     * @param updatedName updated name passed in
-     * @param updatedCode updated code passed in
-     * @param updatedCost updated cost passed in
+     *
+     * @param indexToUpdate     takes in legoset object index
+     * @param updatedName       updated name passed in
+     * @param updatedCode       updated code passed in
+     * @param updatedCost       updated cost passed in
      * @param updatedPieceCount updated piece count passed in
-     * @param updatedTheme updated theme passed in
+     * @param updatedTheme      updated theme passed in
      * @param updatedMinimumAge updated minimum age passed in
      * @return returns true if updated successfully, false otherwise
      */
@@ -62,6 +64,7 @@ public class LegoSetAPI {
 
     /**
      * This method deletes a legoset in the arraylist
+     *
      * @param indexToDelete index of legoset to delete is passed in
      * @return returns the legoset to be deleted if true, false if the legoset is null
      */
@@ -74,6 +77,7 @@ public class LegoSetAPI {
 
     /**
      * This method sets the legoset stock status to in stock
+     *
      * @param indexToUpdate index of legoset passed in
      * @return sets stock status if its a valid index passed. Returns false if legoset is already in stock, returns true otherwise.
      */
@@ -93,6 +97,7 @@ public class LegoSetAPI {
 
     /**
      * This method sets stock status of legoset to out of stock
+     *
      * @param indexOfLegoSet index of legoset passed in
      * @return Checks if it's a valid index passed in. Then, returns true if legoset is in stock, returns false if legoset isnt in stock
      */
@@ -112,6 +117,7 @@ public class LegoSetAPI {
 
     /**
      * This method returns the size of the legoset array list
+     *
      * @return returns the size of the legoset array list
      */
     public int numberOfLegoSets() {
@@ -120,6 +126,7 @@ public class LegoSetAPI {
 
     /**
      * This method returns the number of lego sets in stock
+     *
      * @return returns the number in stock
      */
     public int numberOfLegoSetsInStock() {
@@ -134,6 +141,7 @@ public class LegoSetAPI {
 
     /**
      * This method returns the number of lego sets out of stock
+     *
      * @return returns the number out of stock
      */
     public int numberOfLegoSetsOutOfStock() {
@@ -148,6 +156,7 @@ public class LegoSetAPI {
 
     /**
      * This method returns the number of lego sets by theme as specified
+     *
      * @param themeName takes in theme name
      * @return returns the number of sets by theme
      */
@@ -171,6 +180,7 @@ public class LegoSetAPI {
 
     /**
      * This method returns the number of lego sets for an age rating passed in as param or above
+     *
      * @param minAge minimum age passed in as integer
      * @return returns the number of sets for the minimum age or above
      */
@@ -186,6 +196,7 @@ public class LegoSetAPI {
 
     /**
      * This method returns the total number of instruction booklets across all legoset objects in the legoset array list
+     *
      * @return returns the total number of instruction booklets
      */
     public int totalNumberOfInstructionBooklets() {
@@ -198,6 +209,7 @@ public class LegoSetAPI {
 
     /**
      * This method returns the list of all legosets in the LegoSets array list
+     *
      * @return returns the above
      */
     public String listAllLegoSets() {
@@ -214,6 +226,7 @@ public class LegoSetAPI {
 
     /**
      * this method creates a list of lego sets in stock
+     *
      * @return returns the list that are in stock
      */
     public String listLegoSetsInStock() {
@@ -232,6 +245,7 @@ public class LegoSetAPI {
 
     /**
      * This method creates a string of lego sets out of stock
+     *
      * @return returns the list of sets out of stock
      */
     public String listLegoSetsOutOfStock() {
@@ -251,6 +265,7 @@ public class LegoSetAPI {
 
     /**
      * This method creates a string list of all lego sets that match a specific theme
+     *
      * @param theme theme name passed in
      * @return returns the list of lego sets by that theme
      */
@@ -274,6 +289,7 @@ public class LegoSetAPI {
 
     /**
      * This method creates a list of lego sets for an age rating or above
+     *
      * @param minAge age rating passed in
      * @return returns the list of lego sets for that age rating and/or above
      */
@@ -298,6 +314,7 @@ public class LegoSetAPI {
 
     /**
      * This method creates a list of instruction booklets across each legoset object
+     *
      * @return returns the list of instruction booklets as a string
      */
     public String listAllInstructionBooklets() {
@@ -321,6 +338,7 @@ public class LegoSetAPI {
 
     /**
      * This method creates a list of legosets. Each legoset must match the theme name passed in as a parameter.
+     *
      * @param theme theme name passed in
      * @return returns a list of legosets in stock and out of stock that match the specific theme
      */
@@ -357,6 +375,7 @@ public class LegoSetAPI {
 
     /**
      * This method locates a legoset object
+     *
      * @param indexOfSet index of the lego set passed in
      * @return returns the legoset object at that index
      */
@@ -369,6 +388,7 @@ public class LegoSetAPI {
 
     /**
      * This method finds a lego set by its code
+     *
      * @param code legoset code passed in
      * @return returns the legoset object with that code
      */
@@ -388,6 +408,7 @@ public class LegoSetAPI {
 
     /**
      * This method searches for a lego set by a name keyword
+     *
      * @param name set name passed in
      * @return returns the lego sets in a string with that name
      */
@@ -413,6 +434,7 @@ public class LegoSetAPI {
 
     /**
      * This method searches for instruction booklets across the legoset arraylist
+     *
      * @param fileName booklet filename passed in as a parameter
      * @return returns the list of booklets with that filename
      */
@@ -423,13 +445,13 @@ public class LegoSetAPI {
         } else {
             String bookletThatContainsFileName = "";
             for (LegoSet legoSet : legoSets) {
-                for (InstructionBooklet instructionBooklet : legoSet.getInstructionBooklets()){
-                   if (instructionBooklet.getFileName().toLowerCase().contains(fileName.toLowerCase())) {
-                       bookletThatContainsFileName += instructionBooklet.getFileName() + " in " + legoSet.getName() + " (" + legoSet.getCode() + ")";
-                }
+                for (InstructionBooklet instructionBooklet : legoSet.getInstructionBooklets()) {
+                    if (instructionBooklet.getFileName().toLowerCase().contains(fileName.toLowerCase())) {
+                        bookletThatContainsFileName += instructionBooklet.getFileName() + " in " + legoSet.getName() + " (" + legoSet.getCode() + ")";
+                    }
                 }
             }
-            if (bookletThatContainsFileName.equalsIgnoreCase("")){
+            if (bookletThatContainsFileName.equalsIgnoreCase("")) {
                 return "no instruction booklets found";
             }
             return bookletThatContainsFileName;
@@ -439,6 +461,7 @@ public class LegoSetAPI {
 
     /**
      * This method validates whether the index passed in is a valid legoset object index in the arraylist of legosets
+     *
      * @param index index passed in
      * @return returns true if the index is valid, false otherwise
      */
@@ -448,10 +471,11 @@ public class LegoSetAPI {
 
     /**
      * This method loads saved Lego sets and booklets stored in legoSets.xml
+     *
      * @throws Exception loads saved legosets provided there isnt an error
      */
     public void load() throws Exception {
-        Class<?>[] classes = new Class[] {LegoSet.class, InstructionBooklet.class};
+        Class<?>[] classes = new Class[]{LegoSet.class, InstructionBooklet.class};
         XStream xstream = new XStream(new DomDriver());
         XStream.setupDefaultSecurity(xstream);
         xstream.allowTypes(classes);
@@ -463,6 +487,7 @@ public class LegoSetAPI {
 
     /**
      * This method saves added legosets
+     *
      * @throws Exception saves legosets in XML file
      */
     public void save() throws Exception {

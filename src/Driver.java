@@ -97,12 +97,12 @@ public class Driver {
     //------------------------------------
 
     private void addLegoSet() {
-        String name = ScannerInput.readNextLine(Colours.GREEN+"Enter the lego set name: "+Colours.RESET);
-        int code = ScannerInput.readNextInt(Colours.GREEN+"Enter the lego set code: "+Colours.RESET);
-        double cost = ScannerInput.readNextDouble(Colours.GREEN+"Enter the lego set cost: "+Colours.RESET);
-        int pieceCount = ScannerInput.readNextInt(Colours.GREEN+"Enter the lego set piece count: "+Colours.RESET);
-        String theme = ScannerInput.readNextLine(Colours.GREEN+"Enter the lego set theme: "+Colours.RESET);
-        int minimumAge = ScannerInput.readNextInt(Colours.GREEN+"Enter minimum age for set: "+Colours.RESET);
+        String name = ScannerInput.readNextLine(Colours.GREEN + "Enter the lego set name: " + Colours.RESET);
+        int code = ScannerInput.readNextInt(Colours.GREEN + "Enter the lego set code: " + Colours.RESET);
+        double cost = ScannerInput.readNextDouble(Colours.GREEN + "Enter the lego set cost: " + Colours.RESET);
+        int pieceCount = ScannerInput.readNextInt(Colours.GREEN + "Enter the lego set piece count: " + Colours.RESET);
+        String theme = ScannerInput.readNextLine(Colours.GREEN + "Enter the lego set theme: " + Colours.RESET);
+        int minimumAge = ScannerInput.readNextInt(Colours.GREEN + "Enter minimum age for set: " + Colours.RESET);
 
         boolean isAdded = legoSetAPI.addLegoSet(new LegoSet(name, code, cost, pieceCount, theme, minimumAge));
 
@@ -114,7 +114,7 @@ public class Driver {
     }
 
     private void printAllLegoSets() {
-        System.out.println(Colours.GREEN+"List of lego sets:"+Colours.RESET);
+        System.out.println(Colours.GREEN + "List of lego sets:" + Colours.RESET);
         System.out.println(legoSetAPI.listAllLegoSets());
     }
 
