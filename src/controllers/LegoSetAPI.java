@@ -319,10 +319,14 @@ public class LegoSetAPI {
         } else {
             String bookletThatContainsFileName = "";
             for (LegoSet legoSet : legoSets) {
-                if (legoSet.listInstructionBooklets().toLowerCase().contains(fileName.toLowerCase())) {
-                    bookletThatContainsFileName += legoSet.getInstructionBooklets().contains(fileName.toLowerCase());
-
+                for (InstructionBooklet instructionBooklet : legoSet.getInstructionBooklets()){
+                   if (instructionBooklet.getFileName().toLowerCase().contains(fileName.toLowerCase())) {
+                       bookletThatContainsFileName += instructionBooklet.getFileName() + ".pdf in" + legoSet.getName() + "(" + legoSet.getCode() + ")";
                 }
+                }
+            }
+            if (bookletThatContainsFileName.equalsIgnoreCase("")){
+                return "no instruction booklets found";
             }
             return bookletThatContainsFileName;
         }
