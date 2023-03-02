@@ -1,4 +1,5 @@
 import controllers.LegoSetAPI;
+import models.Colours;
 import models.InstructionBooklet;
 import models.LegoSet;
 import utils.ScannerInput;
@@ -55,10 +56,11 @@ public class Driver {
 
     private int displayMenu() {
         int option = ScannerInput.readNextInt("""
+                \033[0;33m
                 -------------------------------------------------------------------
                  |                            LEGO SET App                        |
-                 ------------------------------------------------------------------
-                 | Lego Set MENU:                                                 |
+                 ------------------------------------------------------------------\033[0;36m
+                  Lego Set MENU:                                                 \033[0;33m
                  |   1) Add a lego set                                            |
                  |   2) List all lego sets                                        |
                  |   3) Update a lego set                                         | 
@@ -66,25 +68,25 @@ public class Driver {
                  |   5) Set stock status of Lego set                              |
                  |   6) Find a specific lego set (by code)                        |
                  |   7) Search for all lego sets (by name)                        |
-                 ------------------------------------------------------------------
-                 |   Instruction Booklet MENU:                                    |
+                 ------------------------------------------------------------------\033[0;36m
+                    Instruction Booklet MENU:                                    \033[0;33m
                  |   8) Add a booklet to a lego set                               |
                  |   9) List all booklets                                         |
                  |   10) Update a booklet on a lego set                           |
                  |   11) Delete a booklet on a lego set                           |
                  |   12) Search for all booklets (by file name)                   |
-                 ------------------------------------------------------------------
-                 |   REPORT MENU:                                                 |  
+                 ------------------------------------------------------------------\033[0;36m
+                    REPORT MENU:                                                 \033[0;33m
                  |   13) Print Overall stock report                               |  
                  |   14) Print all lego sets by chosen theme                      |
                  |   15) Print all lego sets at or above a minimum age            |                               
-                 ------------------------------------------------------------------
-                 |   SETTINGS MENU:                                               |  
+                 ------------------------------------------------------------------\033[0;36m
+                    SETTINGS MENU:                                               \033[0;33m
                  |   16) Save                                                     |  
                  |   17) Load                                                     |
                  |   0) Exit app                                                  |
                  ------------------------------------------------------------------
-                 ==>>  """);
+                 ==>>  \033[0m""");
 
         return option;
     }
@@ -95,12 +97,12 @@ public class Driver {
     //------------------------------------
 
     private void addLegoSet() {
-        String name = ScannerInput.readNextLine("Enter the lego set name: ");
-        int code = ScannerInput.readNextInt("Enter the lego set code: ");
-        double cost = ScannerInput.readNextDouble("Enter the lego set cost: ");
-        int pieceCount = ScannerInput.readNextInt("Enter the lego set piece count: ");
-        String theme = ScannerInput.readNextLine("Enter the lego set theme: ");
-        int minimumAge = ScannerInput.readNextInt("Enter minimum age for set: ");
+        String name = ScannerInput.readNextLine(Colours.GREEN+"Enter the lego set name: "+Colours.RESET);
+        int code = ScannerInput.readNextInt(Colours.GREEN+"Enter the lego set code: "+Colours.RESET);
+        double cost = ScannerInput.readNextDouble(Colours.GREEN+"Enter the lego set cost: "+Colours.RESET);
+        int pieceCount = ScannerInput.readNextInt(Colours.GREEN+"Enter the lego set piece count: "+Colours.RESET);
+        String theme = ScannerInput.readNextLine(Colours.GREEN+"Enter the lego set theme: "+Colours.RESET);
+        int minimumAge = ScannerInput.readNextInt(Colours.GREEN+"Enter minimum age for set: "+Colours.RESET);
 
         boolean isAdded = legoSetAPI.addLegoSet(new LegoSet(name, code, cost, pieceCount, theme, minimumAge));
 
@@ -112,7 +114,7 @@ public class Driver {
     }
 
     private void printAllLegoSets() {
-        System.out.println("List of lego sets:");
+        System.out.println(Colours.GREEN+"List of lego sets:"+Colours.RESET);
         System.out.println(legoSetAPI.listAllLegoSets());
     }
 

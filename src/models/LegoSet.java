@@ -150,25 +150,25 @@ public class LegoSet {
     public String toString() {
         String toString; // string declaration, then assigning a value to it.
         toString = "LegoSet:" +
-                " | Name = " + name +
-                " | Code = " + code +
-                " | Cost = " + "€" + cost +
-                " | " + pieceCount + " pieces" +
-                " | Theme = " + theme +
-                " | Minimum Age for use = " + minimumAge + "+";
+                Colours.RED+" | Name = " +Colours.RESET+ name +
+                Colours.RED+" | Code = " +Colours.RESET+ code +
+                Colours.RED+" | Cost = " + Colours.RESET+"€" + cost +
+                Colours.RED+" | " +Colours.RESET+ pieceCount + " pieces" +
+                Colours.RED+" | Theme = " +Colours.RESET+ theme +
+                Colours.RED+" | Minimum Age for use = " +Colours.RESET+ minimumAge + "+";
 
         if (this.inStock) {
-            toString += " | Availability = " + inStock + "(in stock)" + "\n";
+            toString += Colours.RED+" | Availability = " +Colours.RESET+ inStock + "(in stock)" + "\n";
         } else {
-            toString += " | Availability = " + inStock + "(not available)" + "\n";
+            toString += Colours.RED+" | Availability = " +Colours.RESET+ inStock + "(not available)" + "\n";
         }
 
-        toString += "--- Instruction Booklets ---" + "\n";
+        toString += Colours.ORANGE+"--- Instruction Booklets ---" +Colours.RESET+ "\n";
 
         int total = instructionBooklets.size();
         if (total != 0) {
             for (int i = 0; i < total; i++) {
-                toString += "[" + i + "] " + instructionBooklets.get(i) +"\n";
+                toString += "[" + i + "] " + Colours.CYAN+ instructionBooklets.get(i) +Colours.RESET+"\n";
             }
         } else {
             toString += "No instruction booklets" + "\n";
