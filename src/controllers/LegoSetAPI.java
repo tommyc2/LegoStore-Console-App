@@ -355,6 +355,11 @@ public class LegoSetAPI {
         }
     }
 
+    /**
+     * This method locates a legoset object
+     * @param indexOfSet index of the lego set passed in
+     * @return returns the legoset object at that index
+     */
     public LegoSet findLegoSet(int indexOfSet) {
         if (isValidIndex(indexOfSet)) {
             return legoSets.get(indexOfSet);
@@ -362,6 +367,11 @@ public class LegoSetAPI {
         return null;
     }
 
+    /**
+     * This method finds a lego set by its code
+     * @param code legoset code passed in
+     * @return returns the legoset object with that code
+     */
     public LegoSet findLegoSetByCode(int code) {
         LegoSet foundLegoSet = null;
         for (int i = 0; i < legoSets.size(); i++) {
@@ -376,6 +386,11 @@ public class LegoSetAPI {
         }
     }
 
+    /**
+     * This method searches for a lego set by a name keyword
+     * @param name set name passed in
+     * @return returns the lego sets in a string with that name
+     */
     public String searchLegoSetsByName(String name) {
         if (legoSets.isEmpty()) {
             return "no lego sets stored";
@@ -395,6 +410,12 @@ public class LegoSetAPI {
 
         }
     }
+
+    /**
+     * This method searches for instruction booklets across the legoset arraylist
+     * @param fileName booklet filename passed in as a parameter
+     * @return returns the list of booklets with that filename
+     */
 
     public String searchInstructionBookletsByFileName(String fileName) {
         if (legoSets.isEmpty()) {
@@ -416,10 +437,19 @@ public class LegoSetAPI {
 
     }
 
+    /**
+     * This method validates whether the index passed in is a valid legoset object index in the arraylist of legosets
+     * @param index index passed in
+     * @return returns true if the index is valid, false otherwise
+     */
     public boolean isValidIndex(int index) {
         return (index >= 0) && (index < legoSets.size());
     }
 
+    /**
+     * This method loads saved Lego sets and booklets stored in legoSets.xml
+     * @throws Exception loads saved legosets provided there isnt an error
+     */
     public void load() throws Exception {
         Class<?>[] classes = new Class[] {LegoSet.class, InstructionBooklet.class};
         XStream xstream = new XStream(new DomDriver());
@@ -431,6 +461,10 @@ public class LegoSetAPI {
         is.close();
     }
 
+    /**
+     * This method saves added legosets
+     * @throws Exception saves legosets in XML file
+     */
     public void save() throws Exception {
         XStream xstream = new XStream(new DomDriver());
         ObjectOutputStream out = xstream.createObjectOutputStream(new FileWriter("legoSets.xml"));
