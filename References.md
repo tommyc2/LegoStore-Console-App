@@ -3,12 +3,10 @@
 ### InstructionBooklet.java
 - https://www.w3schools.com/jsref/jsref_endswith.asp
 
-### LegoSet.java
-
-### LegoSet.java
-
 ### LegoSetAPI.java
+- https://www.w3schools.com/java/ref_string_contains.asp
 
 ### Driver.java
+- https://www.w3schools.blog/ansi-colors-java
 
 

@@ -139,8 +139,7 @@ public class Driver {
                     System.out.println("Lego set was not successful");
                 }
 
-            }
-            else {
+            } else {
                 System.out.println("Not a valid index");
             }
         }
@@ -164,43 +163,40 @@ public class Driver {
         }
     }
 
-    private void setStockStatusForLegoSets(){
+    private void setStockStatusForLegoSets() {
         int option = ScannerInput.readNextInt("Type '1' to set lego set in stock, Type '2' to set lego set out of stock: ");
 
-        if (option == 1){
+        if (option == 1) {
             setLegoSetInStock();
-        }
-        if (option == 2){
+        } else if (option == 2) {
             setLegoSetOutOfStock();
-        }
-        else{
+        } else {
             System.out.println("Please type a valid number (1 or 2)");
             setStockStatusForLegoSets();
         }
     }
+
     private void setLegoSetInStock() {
         // Set Lego Set to IN STOCK //
         int indexToSetInStock = ScannerInput.readNextInt("Enter the index of the lego set: ");
         boolean isDone = legoSetAPI.setLegoSetInStock(indexToSetInStock);
 
-        if (isDone){
+        if (isDone) {
             System.out.println("Lego set is now in stock!");
-        }
-        else{
+        } else {
             System.out.println("Lego set is already in stock!");
         }
 
     }
 
-    private void setLegoSetOutOfStock(){
+    private void setLegoSetOutOfStock() {
         // Set Lego Set to OUT OF STOCK //
         int indexToSetOutOfStock = ScannerInput.readNextInt("Enter the index of the lego set: ");
         boolean isDone = legoSetAPI.setLegoSetOutOfStock(indexToSetOutOfStock);
 
-        if (isDone){
+        if (isDone) {
             System.out.println("Lego set is now out of stock!");
-        }
-        else{
+        } else {
             System.out.println("Lego set is already out of stock!");
         }
     }
@@ -220,30 +216,29 @@ public class Driver {
     //--------------------------------------------------
 
     private void addBookletToLegoSet() {
-    printAllLegoSets();
-    int indexForLegoSet = ScannerInput.readNextInt("Enter the lego set to add the booklet to: ");
+        printAllLegoSets();
+        int indexForLegoSet = ScannerInput.readNextInt("Enter the lego set to add the booklet to: ");
 
-    if (legoSetAPI.isValidIndex(indexForLegoSet)){
+        if (legoSetAPI.isValidIndex(indexForLegoSet)) {
 
-        String fileName = ScannerInput.readNextLine("Enter the booklet filename here, then press enter: ");
-        int numOfPages = ScannerInput.readNextInt("Enter the number of pages in the booklet here, then press enter: ");
+            String fileName = ScannerInput.readNextLine("Enter the booklet filename here, then press enter: ");
+            int numOfPages = ScannerInput.readNextInt("Enter the number of pages in the booklet here, then press enter: ");
 
-        InstructionBooklet bookletToAdd = new InstructionBooklet(numOfPages,fileName);
+            InstructionBooklet bookletToAdd = new InstructionBooklet(numOfPages, fileName);
 
-        boolean bookletAdded = legoSetAPI.findLegoSet(indexForLegoSet).addInstructionBooklet(bookletToAdd);
+            boolean bookletAdded = legoSetAPI.findLegoSet(indexForLegoSet).addInstructionBooklet(bookletToAdd);
 
-        if (bookletAdded){
-            System.out.println("Instruction booklet successfully added!");
+            if (bookletAdded) {
+                System.out.println("Instruction booklet successfully added!");
+            } else {
+                System.out.println("Sorry, Instruction booklet was not added to lego set");
+            }
         }
-        else{
-            System.out.println("Sorry, Instruction booklet was not added to lego set");
-        }
-    }
     }
 
     private void printAllInstructionBooklets() {
-    System.out.println("List of all instruction booklets in all lego sets: ");
-    System.out.println(legoSetAPI.listAllInstructionBooklets());
+        System.out.println("List of all instruction booklets in all lego sets: ");
+        System.out.println(legoSetAPI.listAllInstructionBooklets());
     }
 
     private void updateBookletInLegoSet() {
@@ -252,11 +247,11 @@ public class Driver {
         int indexOfLegoSet = ScannerInput.readNextInt("Enter the index of the booklet's lego set: ");
         int indexOfBooklet = ScannerInput.readNextInt("Enter the index of the booklet: ");
 
-        if (legoSetAPI.findLegoSet(indexOfLegoSet) == null){
+        if (legoSetAPI.findLegoSet(indexOfLegoSet) == null) {
             System.out.println("\n" + "WARNING: There are no lego sets of this index");
         }
 
-        if (legoSetAPI.findLegoSet(indexOfLegoSet).isValidIndex(indexOfBooklet)){
+        if (legoSetAPI.findLegoSet(indexOfLegoSet).isValidIndex(indexOfBooklet)) {
 
             String newFileName = ScannerInput.readNextLine("Enter the new file name of the booklet: ");
             int newNumOfPages = ScannerInput.readNextInt("Enter the new number of pages of the booklet: ");
@@ -269,20 +264,18 @@ public class Driver {
                 System.out.println("Booklet update was not successful");
             }
 
-        }
-
-        else {
+        } else {
             System.out.println("Not a valid index of a lego set booklet");
         }
 
-        }
+    }
 
 
     private void deleteBookletFromLegoSet() {
-       printAllInstructionBooklets();
+        printAllLegoSets();
 
         if (legoSetAPI.totalNumberOfInstructionBooklets() > 0) {
-            int indexOfLegoSetToDelete = ScannerInput.readNextInt("Enter index of lego set booklet: ");
+            int indexOfLegoSetToDelete = ScannerInput.readNextInt("Enter index of booklet's lego set: ");
             int indexOfBookletToDelete = ScannerInput.readNextInt("Enter index of booklet to delete: ");
 
             InstructionBooklet bookletToDelete = legoSetAPI.findLegoSet(indexOfLegoSetToDelete).deleteInstructionBooklet(indexOfBookletToDelete);
@@ -301,17 +294,17 @@ public class Driver {
     //  Private methods for Search facility (for LegoSets and Booklets)
     //-----------------------------------------------------------------
     private void searchBookletsByFileName() {
-    String fileName = ScannerInput.readNextLine("Enter the filename of the booklet to find: ");
-    System.out.println(legoSetAPI.searchInstructionBookletsByFileName(fileName));
+        String fileName = ScannerInput.readNextLine("Enter the filename of the booklet to find: ");
+        System.out.println(legoSetAPI.searchInstructionBookletsByFileName(fileName));
     }
 
     private void findLegoSetByCode() {
-        int code  = ScannerInput.readNextInt("Enter the lego set code: ");
+        int code = ScannerInput.readNextInt("Enter the lego set code: ");
         System.out.println(legoSetAPI.findLegoSetByCode(code));
     }
 
     private void searchLegoSetsByName() {
-        String name  = ScannerInput.readNextLine("Enter the lego set name: ");
+        String name = ScannerInput.readNextLine("Enter the lego set name: ");
         System.out.println(legoSetAPI.searchLegoSetsByName(name));
     }
 
@@ -320,9 +313,9 @@ public class Driver {
     // ----------------------------
 
     private void printStockReport() {
-    System.out.println("--- Overall Stock Report Year Ending 2022 ---");
-    printInStockLegoSets();
-    printOutOfStockLegoSets();
+        System.out.println("--- Overall Stock Report Year Ending 2022 ---");
+        printInStockLegoSets();
+        printOutOfStockLegoSets();
     }
 
     private void printInStockLegoSets() {
@@ -332,7 +325,7 @@ public class Driver {
     }
 
     private void printOutOfStockLegoSets() {
-        System.out.println("\n" +"--- List of out of stock lego sets ---");
+        System.out.println("\n" + "--- List of out of stock lego sets ---");
         System.out.println(legoSetAPI.numberOfLegoSetsOutOfStock());
         System.out.println(legoSetAPI.listLegoSetsOutOfStock());
     }
@@ -342,19 +335,17 @@ public class Driver {
     // --------------------------------
 
     private void save() {
-        try{
+        try {
             legoSetAPI.save();
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             System.err.println("Error occurred: " + e);
         }
     }
 
-    private void load(){
-        try{
+    private void load() {
+        try {
             legoSetAPI.load();
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             System.err.println("Error occurred: " + e);
         }
     }

@@ -303,15 +303,6 @@ public class LegoSetAPI {
 
         }
     }
-    //TODO Add a method, searchInstructionBookletsByFileName(String).  The return type is String.
-    //    This method returns a list of instruction booklets whose file name contains the string passed
-    //    as a parameter.
-    //    Each matching booklet should be on a new line and should contain the lego set name and code e.g.
-    //        InstructionBook1.pdf in Fire Station (45343)
-    //        InstructionBk2.pdf in Titanic (65434)
-    //    If there are no lego sets stored in the array list, return a string that contains "No Lego sets".
-    //    If there are no lego sets whose name contains the supplied string, the return string should
-    //    have "No instruction booklets found".
 
     public String searchInstructionBookletsByFileName(String fileName) {
         if (legoSets.isEmpty()) {
@@ -321,7 +312,7 @@ public class LegoSetAPI {
             for (LegoSet legoSet : legoSets) {
                 for (InstructionBooklet instructionBooklet : legoSet.getInstructionBooklets()){
                    if (instructionBooklet.getFileName().toLowerCase().contains(fileName.toLowerCase())) {
-                       bookletThatContainsFileName += instructionBooklet.getFileName() + ".pdf in" + legoSet.getName() + "(" + legoSet.getCode() + ")";
+                       bookletThatContainsFileName += instructionBooklet.getFileName() + " in " + legoSet.getName() + " (" + legoSet.getCode() + ")";
                 }
                 }
             }

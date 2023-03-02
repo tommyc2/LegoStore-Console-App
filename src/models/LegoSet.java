@@ -171,7 +171,7 @@ public class LegoSet {
                 toString += "[" + i + "] " + instructionBooklets.get(i) +"\n";
             }
         } else {
-            toString += "No instruction booklets";
+            toString += "No instruction booklets" + "\n";
         }
         return toString;
     }
