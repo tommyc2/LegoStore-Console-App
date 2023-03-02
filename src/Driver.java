@@ -268,11 +268,13 @@ public class Driver {
     }
 
     private void findLegoSetByCode() {
-
+        int code  = ScannerInput.readNextInt("Enter the lego set code: ");
+        System.out.println(legoSetAPI.findLegoSetByCode(code));
     }
 
     private void searchLegoSetsByName() {
-
+        String name  = ScannerInput.readNextLine("Enter the lego set name: ");
+        System.out.println(legoSetAPI.searchLegoSetsByName(name));
     }
 
     //-----------------------------
