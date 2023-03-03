@@ -224,16 +224,15 @@ public class Driver {
         if (legoSetAPI.isValidIndex(indexForLegoSet)) {
 
             String fileName = ScannerInput.readNextLine("Enter the booklet filename here, then press enter: ");
-            int numOfPages = ScannerInput.readNextInt("Enter the number of pages in the booklet here, then press enter: ");
-
-            InstructionBooklet bookletToAdd = new InstructionBooklet(numOfPages, fileName);
+            int numberOfPages = ScannerInput.readNextInt("Enter the number of pages in the booklet here, then press enter: ");
+            InstructionBooklet bookletToAdd = new InstructionBooklet(numberOfPages, fileName);
 
             boolean bookletAdded = legoSetAPI.findLegoSet(indexForLegoSet).addInstructionBooklet(bookletToAdd);
 
             if (bookletAdded) {
-                System.out.println("Instruction booklet successfully added!");
+                System.out.println("Instruction booklet successfully added to lego set!");
             } else {
-                System.out.println("Sorry, Instruction booklet was not added to lego set");
+                System.out.println("Sorry, Instruction booklet was not added to the lego set");
             }
         }
     }
@@ -246,28 +245,31 @@ public class Driver {
     private void updateBookletInLegoSet() {
         printAllInstructionBooklets();
 
+        //Lego set index
         int indexOfLegoSet = ScannerInput.readNextInt("Enter the index of the booklet's lego set: ");
+        // Booklet index
         int indexOfBooklet = ScannerInput.readNextInt("Enter the index of the booklet: ");
 
-        if (legoSetAPI.findLegoSet(indexOfLegoSet) == null) {
-            System.out.println("\n" + "WARNING: There are no lego sets of this index");
-        }
+        try {
+            if (legoSetAPI.findLegoSet(indexOfLegoSet).isValidIndex(indexOfBooklet)) {
 
-        if (legoSetAPI.findLegoSet(indexOfLegoSet).isValidIndex(indexOfBooklet)) {
+                String newFileName = ScannerInput.readNextLine("Enter the new file name of the booklet: ");
+                int newNumOfPages = ScannerInput.readNextInt("Enter the new number of pages of the booklet: ");
 
-            String newFileName = ScannerInput.readNextLine("Enter the new file name of the booklet: ");
-            int newNumOfPages = ScannerInput.readNextInt("Enter the new number of pages of the booklet: ");
+                boolean updatedLegoSetBooklet = legoSetAPI.findLegoSet(indexOfLegoSet).updateInstructionBooklet(indexOfBooklet, newFileName, newNumOfPages);
 
-            boolean updatedBooklet = legoSetAPI.findLegoSet(indexOfLegoSet).updateInstructionBooklet(indexOfBooklet, newFileName, newNumOfPages);
+                if (updatedLegoSetBooklet) {
+                    System.out.println("Updated booklet successfully!");
+                } else {
+                    System.out.println("Booklet update was not successful");
+                }
 
-            if (updatedBooklet) {
-                System.out.println("Updated booklet successfully!");
             } else {
-                System.out.println("Booklet update was not successful");
+                System.out.println("Not a valid index of a lego set booklet");
             }
-
-        } else {
-            System.out.println("Not a valid index of a lego set booklet");
+        } catch (Exception error) {
+            System.out.println(Colours.RED + "\n" + "Error occurred - this might be a non-existent lego set: " + Colours.RESET
+                    + "\n" + Colours.ORANGE + error + Colours.RESET);
         }
 
     }
